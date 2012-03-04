@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "ui_mainwindow.h"
+#include "macroeditor.h"
 
 class QAction;
 
@@ -13,18 +14,23 @@ class MainWindow : public QMainWindow, public Ui::MainWindow
 
 public:
     MainWindow();
+    virtual ~MainWindow();
 
 private slots:
-    void about();
+    void showAboutBox();
 
 private:
+    void createChilds();
     void createActions();
     void createMenus();
 
     void makeConnections();
 
-    QAction *quitAction;
-    QAction *aboutAction;
+    MacroEditor *macroEditor;
+
+    QAction *action_Quit;
+    QAction *action_MacroEditor;
+    QAction *action_AboutBox;
 };
 
 #endif // MAINWINDOW_H

@@ -17,7 +17,10 @@ RCC_DIR = ../build/rcc
 OBJECTS_DIR = ../build
 
 # Source settings
-HEADERS += mainwindow.h
+HEADERS += mainwindow.h \
+           macroeditor.h
 SOURCES += main.cpp \
-           mainwindow.cpp
-FORMS += mainwindow.ui
+           mainwindow.cpp \
+           macroeditor.cpp
+FORMS += mainwindow.ui \
+         macroeditor.ui
