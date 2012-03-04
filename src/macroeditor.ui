@@ -16,11 +16,8 @@
     <height>400</height>
    </size>
   </property>
-  <property name="baseSize">
-   <size>
-    <width>350</width>
-    <height>650</height>
-   </size>
+  <property name="floating">
+   <bool>true</bool>
   </property>
   <property name="windowTitle">
    <string>Macro Editor</string>

@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include <QtGui>
 
 #include "mainwindow.h"
@@ -29,7 +27,8 @@ void MainWindow::showAboutBox()
 
 void MainWindow::createChilds()
 {
-    macroEditor = new MacroEditor();
+    macroEditor = new MacroEditor(this);
+    macroEditor->hide();
 }
 
 void MainWindow::createActions()
