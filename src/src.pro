@@ -6,7 +6,7 @@
 TEMPLATE = app
 TARGET = telamon
 DESTDIR = ../bin
-CONFIG += qt warn_on exceptions
+CONFIG += qt debug warn_on
 INCLUDEPATH += .
 
 # Build settings
