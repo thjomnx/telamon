@@ -4,4 +4,4 @@
 Makefile
 
 /.kdev4
-telamon.kdev4
+*.kdev4
