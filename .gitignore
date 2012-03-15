@@ -1,7 +1,6 @@
 /bin
 /build
 
-Makefile
+Makefile*
 
-/.kdev4
-*.kdev4
+*.kdev4*
