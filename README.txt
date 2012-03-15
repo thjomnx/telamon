@@ -1,0 +1,19 @@
+
+Some build information.
+
+######################################
+
+Build on Linux (i686/x64):
+
+$ qmake
+$ make
+
+######################################
+
+Build von Windows 7 (x64):
+
+> PATH=C:\QtSDK\mingw\bin;C:\QtSDK\Desktop\Qt\4.8.0\mingw\bin   (or whatever points to qmake and mingw32-make)
+
+> qmake
+> mingw32-make
+
