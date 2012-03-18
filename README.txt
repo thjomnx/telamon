@@ -10,7 +10,7 @@ $ make
 
 ######################################
 
-Build von Windows 7 (x64):
+Build on Windows 7 (x64):
 
 > PATH=C:\QtSDK\mingw\bin;C:\QtSDK\Desktop\Qt\4.8.0\mingw\bin   (or whatever points to qmake and mingw32-make)
 
