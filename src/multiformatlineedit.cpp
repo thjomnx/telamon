@@ -3,11 +3,12 @@
 #include "multiformatlineedit.h"
 
 MultiFormatLineEdit::MultiFormatLineEdit(QWidget *parent)
-    : QLineEdit(parent)
 {
+    MultiFormatLineEdit("", parent);
 }
 
-MultiFormatLineEdit::MultiFormatLineEdit(const QString& , QWidget *parent)
+MultiFormatLineEdit::MultiFormatLineEdit(const QString& contents, QWidget *parent)
     : QLineEdit(parent)
 {
+    setText(contents);
 }
