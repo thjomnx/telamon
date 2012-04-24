@@ -12,6 +12,13 @@ class MacroEditor : public QDockWidget, public Ui::MacroEditor
 public:
     MacroEditor(QWidget *parent = 0);
     virtual ~MacroEditor();
+
+private slots:
+    void addMacroBox();
+    void removeMacroBox();
+
+private:
+    void makeConnections();
 };
 
 #endif // MACROEDITOR_H

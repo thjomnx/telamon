@@ -19,10 +19,15 @@ OBJECTS_DIR = ../build
 # Source settings
 HEADERS += mainwindow.h \
            macroeditor.h \
+           textmacrowidget.h \
            multiformatlineedit.h
+
 SOURCES += main.cpp \
            mainwindow.cpp \
            macroeditor.cpp \
+           textmacrowidget.cpp \
            multiformatlineedit.cpp
+
 FORMS += mainwindow.ui \
-         macroeditor.ui
+         macroeditor.ui \
+         textmacrowidget.ui
