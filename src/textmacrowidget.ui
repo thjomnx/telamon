@@ -2,20 +2,12 @@
 <ui version="4.0">
  <class>TextMacroWidget</class>
  <widget class="QWidget" name="TextMacroWidget">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>340</width>
-    <height>33</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>TextMacroWidget</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="sizeConstraint">
-    <enum>QLayout::SetFixedSize</enum>
+   <property name="margin">
+    <number>0</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">

@@ -1,6 +1,7 @@
 #include <QtGui>
 
 #include "macroeditor.h"
+#include "textmacrowidget.h"
 
 MacroEditor::MacroEditor(QWidget *parent)
     : QDockWidget(parent)
@@ -22,15 +23,25 @@ void MacroEditor::makeConnections()
 
 void MacroEditor::addMacroBox()
 {
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(new QLineEdit);
-    layout->addWidget(new QPushButton);
+    TextMacroWidget *tmw = new TextMacroWidget(this);
+    int idx = verticalLayout->count() - 2;
 
-    verticalLayout->removeItem(verticalSpacer);
-    verticalLayout->addLayout(layout);
-    verticalLayout->addSpacerItem(verticalSpacer);
+    qDebug() << tmw;
+
+    verticalLayout->insertWidget(idx + 1, tmw);
 }
 
 void MacroEditor::removeMacroBox()
 {
+    QList<TextMacroWidget*> list = dockWidgetContents->findChildren<TextMacroWidget*>();
+
+    if (!list.empty())
+    {
+        TextMacroWidget *tmw = list.last();
+
+        qDebug() << tmw;
+
+        verticalLayout->removeWidget(tmw);
+        delete tmw;
+    }
 }
