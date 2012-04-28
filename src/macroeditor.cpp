@@ -34,14 +34,14 @@ void MacroEditor::makeConnections()
 
 void MacroEditor::addMacroBox()
 {
+    QList<TextMacroWidget*> list = dockWidgetContents->findChildren<TextMacroWidget*>();
     TextMacroWidget *tmw = new TextMacroWidget(this);
-    int idxLastBox = verticalLayout->count() - 2;
 
     qDebug() << "addMacroBox() " << tmw;
 
-    verticalLayout->insertWidget(idxLastBox + 1, tmw);
+    verticalLayout->insertWidget(list.count() + 1, tmw);
 
-    if (idxLastBox < 1)
+    if (list.count() == 0)
     {
         pushButton_Remove->setEnabled(true);
     }
