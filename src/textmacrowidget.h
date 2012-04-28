@@ -12,6 +12,15 @@ class TextMacroWidget : public QWidget, public Ui::TextMacroWidget
 public:
     TextMacroWidget(QWidget *parent = 0);
     virtual ~TextMacroWidget();
+
+signals:
+    void macroTriggered(TextMacroWidget* source);
+
+private:
+    void makeConnections();
+
+private slots:
+    void triggerCatched();
 };
 
 #endif // TEXTMACROWIDGET_H

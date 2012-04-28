@@ -37,7 +37,9 @@ void MacroEditor::addMacroBox()
     QList<TextMacroWidget*> list = dockWidgetContents->findChildren<TextMacroWidget*>();
     TextMacroWidget *tmw = new TextMacroWidget(this);
 
-    qDebug() << "addMacroBox() " << tmw;
+    connect(tmw, SIGNAL(macroTriggered(TextMacroWidget*)), this, SLOT(macroTriggered(TextMacroWidget*)));
+
+    qDebug() << "addMacroBox():" << tmw;
 
     verticalLayout->insertWidget(list.count() + 1, tmw);
 
@@ -60,9 +62,16 @@ void MacroEditor::removeMacroBox()
     {
         TextMacroWidget *tmw = list.last();
 
-        qDebug() << "removeMacroBox() " << tmw;
+        disconnect(tmw, SIGNAL(macroTriggered(TextMacroWidget*)), this, SLOT(macroTriggered(TextMacroWidget*)));
+
+        qDebug() << "removeMacroBox():" << tmw;
 
         verticalLayout->removeWidget(tmw);
         delete tmw;
     }
+}
+
+void MacroEditor::macroTriggered(TextMacroWidget *source)
+{
+    qDebug() << "macroTriggered():" << source;
 }

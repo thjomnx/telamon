@@ -4,6 +4,7 @@
 #include <QDockWidget>
 
 #include "ui_macroeditor.h"
+#include "textmacrowidget.h"
 
 class MacroEditor : public QDockWidget, public Ui::MacroEditor
 {
@@ -16,6 +17,8 @@ public:
 private slots:
     void addMacroBox();
     void removeMacroBox();
+
+    void macroTriggered(TextMacroWidget *source);
 
 private:
     void initUi();
