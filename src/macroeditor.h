@@ -18,6 +18,7 @@ private slots:
     void removeMacroBox();
 
 private:
+    void initUi();
     void makeConnections();
 };
 

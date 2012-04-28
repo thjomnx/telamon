@@ -8,11 +8,22 @@ MacroEditor::MacroEditor(QWidget *parent)
 {
     setupUi(this);
 
+    initUi();
     makeConnections();
 }
 
 MacroEditor::~MacroEditor()
 {
+}
+
+void MacroEditor::initUi()
+{
+    QList<TextMacroWidget*> list = dockWidgetContents->findChildren<TextMacroWidget*>();
+
+    if (list.count() < 1)
+    {
+        pushButton_Remove->setEnabled(false);
+    }
 }
 
 void MacroEditor::makeConnections()
@@ -24,22 +35,32 @@ void MacroEditor::makeConnections()
 void MacroEditor::addMacroBox()
 {
     TextMacroWidget *tmw = new TextMacroWidget(this);
-    int idx = verticalLayout->count() - 2;
+    int idxLastBox = verticalLayout->count() - 2;
 
-    qDebug() << tmw;
+    qDebug() << "addMacroBox() " << tmw;
 
-    verticalLayout->insertWidget(idx + 1, tmw);
+    verticalLayout->insertWidget(idxLastBox + 1, tmw);
+
+    if (idxLastBox < 1)
+    {
+        pushButton_Remove->setEnabled(true);
+    }
 }
 
 void MacroEditor::removeMacroBox()
 {
     QList<TextMacroWidget*> list = dockWidgetContents->findChildren<TextMacroWidget*>();
 
+    if (list.count() == 1)
+    {
+        pushButton_Remove->setEnabled(false);
+    }
+
     if (!list.empty())
     {
         TextMacroWidget *tmw = list.last();
 
-        qDebug() << tmw;
+        qDebug() << "removeMacroBox() " << tmw;
 
         verticalLayout->removeWidget(tmw);
         delete tmw;

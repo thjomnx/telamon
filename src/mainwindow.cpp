@@ -2,6 +2,8 @@
 
 #include "mainwindow.h"
 
+#define DEBUG
+
 MainWindow::MainWindow()
     : QMainWindow()
 {
@@ -12,6 +14,10 @@ MainWindow::MainWindow()
     createMenus();
 
     makeConnections();
+
+#ifdef DEBUG
+    action_MacroEditor->trigger();
+#endif
 }
 
 MainWindow::~MainWindow()
