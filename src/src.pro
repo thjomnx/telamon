@@ -6,8 +6,11 @@
 TEMPLATE = app
 TARGET = telamon
 DESTDIR = ../bin
-CONFIG += qt debug warn_on
 INCLUDEPATH += .
+
+# Qt settings
+QT += network
+CONFIG += qt debug warn_on
 
 # Build settings
 DESTDIR = ../bin
@@ -20,13 +23,15 @@ OBJECTS_DIR = ../build
 HEADERS += mainwindow.h \
            macroeditor.h \
            textmacrowidget.h \
-           #multiformatlineedit.h
+           udptestlistener.h \
+           udptestclient.h
 
 SOURCES += main.cpp \
            mainwindow.cpp \
            macroeditor.cpp \
            textmacrowidget.cpp \
-           #multiformatlineedit.cpp
+           udptestlistener.cpp \
+           udptestclient.cpp
 
 FORMS += mainwindow.ui \
          macroeditor.ui \

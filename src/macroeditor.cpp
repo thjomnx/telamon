@@ -1,7 +1,6 @@
 #include <QtGui>
 
 #include "macroeditor.h"
-#include "textmacrowidget.h"
 
 MacroEditor::MacroEditor(QWidget *parent)
     : QDockWidget(parent)
