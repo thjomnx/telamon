@@ -6,8 +6,6 @@
 #include "ui_mainwindow.h"
 #include "macroeditor.h"
 
-class QAction;
-
 class MainWindow : public QMainWindow, public Ui::MainWindow
 {
     Q_OBJECT
