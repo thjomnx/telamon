@@ -73,4 +73,6 @@ void MacroEditor::removeMacroBox()
 void MacroEditor::macroTriggered(TextMacroWidget *source)
 {
     qDebug() << "macroTriggered():" << source;
+
+    client.sendData(source->lineEdit_Input->text());
 }

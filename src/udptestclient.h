@@ -12,7 +12,7 @@ public:
     UdpTestClient();
     virtual ~UdpTestClient();
 
-    void sendData();
+    void sendData(QString msg);
 
 private:
     QUdpSocket socket;

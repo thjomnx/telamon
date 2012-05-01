@@ -5,9 +5,9 @@
 
 UdpTestListener::UdpTestListener()
 {
-    makeConnections();
-
     socket.bind(52436);
+
+    makeConnections();
 }
 
 UdpTestListener::~UdpTestListener()
@@ -22,19 +22,17 @@ void UdpTestListener::processPendingDatagrams()
     {
         datagram.resize(socket.pendingDatagramSize());
         socket.readDatagram(datagram.data(), datagram.size());
-
-        qDebug() << "processPendingDatagrams()";
     }
     while (socket.hasPendingDatagrams());
 
-    QString message;
+    QString msg;
 
     QDataStream in(&datagram, QIODevice::ReadOnly);
     in.setVersion(QDataStream::Qt_4_8);
 
-    in >> message;
+    in >> msg;
 
-    qDebug() << message;
+    qDebug() << "processPendingDatagrams(): msg = " << msg;
 }
 
 void UdpTestListener::makeConnections()

@@ -11,15 +11,15 @@ UdpTestClient::~UdpTestClient()
 {
 }
 
-void UdpTestClient::sendData()
+void UdpTestClient::sendData(QString msg)
 {
     QByteArray datagram;
     QDataStream out(&datagram, QIODevice::WriteOnly);
     out.setVersion(QDataStream::Qt_4_8);
 
-    out << "Hello other side!";
+    out << msg;
 
-    qDebug() << "sendData()";
+    qDebug() << "sendData(QString): msg = " << msg;
 
     socket.writeDatagram(datagram, QHostAddress::LocalHost, 52436);
 }
