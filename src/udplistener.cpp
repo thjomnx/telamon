@@ -1,20 +1,20 @@
 #include <QtCore>
 #include <QtNetwork>
 
-#include "udptestlistener.h"
+#include "udplistener.h"
 
-UdpTestListener::UdpTestListener()
+UdpListener::UdpListener()
 {
     socket.bind(52436);
 
     makeConnections();
 }
 
-UdpTestListener::~UdpTestListener()
+UdpListener::~UdpListener()
 {
 }
 
-void UdpTestListener::processPendingDatagrams()
+void UdpListener::processPendingDatagrams()
 {
     QByteArray datagram;
 
@@ -35,7 +35,7 @@ void UdpTestListener::processPendingDatagrams()
     qDebug() << "processPendingDatagrams(): msg = " << msg;
 }
 
-void UdpTestListener::makeConnections()
+void UdpListener::makeConnections()
 {
     connect(&socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagrams()));
 }

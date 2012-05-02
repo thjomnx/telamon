@@ -6,8 +6,8 @@
 #include "ui_macroeditor.h"
 #include "textmacrowidget.h"
 
-#include "udptestlistener.h"
-#include "udptestclient.h"
+#include "udplistener.h"
+#include "udpclient.h"
 
 class MacroEditor : public QDockWidget, public Ui::MacroEditor
 {
@@ -27,8 +27,8 @@ private:
     void initUi();
     void makeConnections();
 
-    UdpTestListener listener;
-    UdpTestClient client;
+    UdpListener listener;
+    UdpClient client;
 };
 
 #endif // MACROEDITOR_H

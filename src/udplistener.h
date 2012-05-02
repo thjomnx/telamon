@@ -1,16 +1,16 @@
-#ifndef UDPTESTLISTENER_H
-#define UDPTESTLISTENER_H
+#ifndef UDPLISTENER_H
+#define UDPLISTENER_H
 
 #include <QObject>
 #include <QUdpSocket>
 
-class UdpTestListener : public QObject
+class UdpListener : public QObject
 {
     Q_OBJECT
 
 public:
-    UdpTestListener();
-    virtual ~UdpTestListener();
+    UdpListener();
+    virtual ~UdpListener();
 
 private slots:
     void processPendingDatagrams();
@@ -21,4 +21,4 @@ private:
     QUdpSocket socket;
 };
 
-#endif // UDPTESTLISTENER_H
+#endif // UDPLISTENER_H

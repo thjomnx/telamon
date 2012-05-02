@@ -1,17 +1,17 @@
 #include <QtCore>
 #include <QtNetwork>
 
-#include "udptestclient.h"
+#include "udpclient.h"
 
-UdpTestClient::UdpTestClient()
+UdpClient::UdpClient()
 {
 }
 
-UdpTestClient::~UdpTestClient()
+UdpClient::~UdpClient()
 {
 }
 
-void UdpTestClient::sendData(QString msg)
+void UdpClient::sendData(QString msg)
 {
     QByteArray datagram;
     QDataStream out(&datagram, QIODevice::WriteOnly);

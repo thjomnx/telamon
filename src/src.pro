@@ -23,15 +23,15 @@ OBJECTS_DIR = ../build
 HEADERS += mainwindow.h \
            macroeditor.h \
            textmacrowidget.h \
-           udptestlistener.h \
-           udptestclient.h
+           udplistener.h \
+           udpclient.h
 
 SOURCES += main.cpp \
            mainwindow.cpp \
            macroeditor.cpp \
            textmacrowidget.cpp \
-           udptestlistener.cpp \
-           udptestclient.cpp
+           udplistener.cpp \
+           udpclient.cpp
 
 FORMS += mainwindow.ui \
          macroeditor.ui \
