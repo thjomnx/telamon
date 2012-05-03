@@ -6,9 +6,6 @@
 #include "ui_macroeditor.h"
 #include "textmacrowidget.h"
 
-#include "udplistener.h"
-#include "udpclient.h"
-
 class MacroEditor : public QDockWidget, public Ui::MacroEditor
 {
     Q_OBJECT
@@ -26,9 +23,6 @@ private slots:
 private:
     void initUi();
     void makeConnections();
-
-    UdpListener listener;
-    UdpClient client;
 };
 
 #endif // MACROEDITOR_H

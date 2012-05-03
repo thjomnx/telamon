@@ -4,13 +4,13 @@
 #include <QObject>
 #include <QUdpSocket>
 
-class UdpListener : public QObject
+class UdpReceiver : public QObject
 {
     Q_OBJECT
 
 public:
-    UdpListener();
-    virtual ~UdpListener();
+    UdpReceiver();
+    virtual ~UdpReceiver();
 
 private slots:
     void processPendingDatagrams();
