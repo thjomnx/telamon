@@ -17,7 +17,7 @@ MacroEditor::~MacroEditor()
 
 void MacroEditor::initUi()
 {
-    QList<TextMacroWidget*> list = dockWidgetContents->findChildren<TextMacroWidget*>();
+    QList<TextMacroWidget*> list = scrollAreaWidgetContents->findChildren<TextMacroWidget*>();
 
     if (list.count() < 1)
     {
@@ -33,14 +33,15 @@ void MacroEditor::makeConnections()
 
 void MacroEditor::addMacroBox()
 {
-    QList<TextMacroWidget*> list = dockWidgetContents->findChildren<TextMacroWidget*>();
+    QList<TextMacroWidget*> list = scrollAreaWidgetContents->findChildren<TextMacroWidget*>();
     TextMacroWidget *tmw = new TextMacroWidget(this);
 
     connect(tmw, SIGNAL(macroTriggered(TextMacroWidget*)), this, SLOT(macroTriggered(TextMacroWidget*)));
 
     qDebug() << "addMacroBox():" << tmw;
 
-    verticalLayout->insertWidget(list.count() + 1, tmw);
+    QVBoxLayout* layout = static_cast<QVBoxLayout*>(scrollAreaWidgetContents->layout());
+    layout->insertWidget(list.count(), tmw);
 
     if (list.count() == 0)
     {
@@ -50,7 +51,7 @@ void MacroEditor::addMacroBox()
 
 void MacroEditor::removeMacroBox()
 {
-    QList<TextMacroWidget*> list = dockWidgetContents->findChildren<TextMacroWidget*>();
+    QList<TextMacroWidget*> list = scrollAreaWidgetContents->findChildren<TextMacroWidget*>();
 
     if (list.count() == 1)
     {
@@ -65,7 +66,9 @@ void MacroEditor::removeMacroBox()
 
         qDebug() << "removeMacroBox():" << tmw;
 
-        verticalLayout->removeWidget(tmw);
+        QVBoxLayout* layout = static_cast<QVBoxLayout*>(scrollAreaWidgetContents->layout());
+        layout->removeWidget(tmw);
+
         delete tmw;
     }
 }
