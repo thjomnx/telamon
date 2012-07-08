@@ -4,6 +4,7 @@
 #include <QDockWidget>
 
 #include "ui_connectioneditor.h"
+#include "udpreceiverwidget.h"
 
 class ConnectionEditor : public QDockWidget, public Ui::ConnectionEditor
 {
@@ -12,6 +13,14 @@ class ConnectionEditor : public QDockWidget, public Ui::ConnectionEditor
 public:
     ConnectionEditor(QWidget *parent = 0);
     virtual ~ConnectionEditor();
+
+private slots:
+    void addConnection();
+    void removeConnection();
+
+private:
+    void initUi();
+    void makeConnections();
 };
 
 #endif // CONNECTIONEDITOR_H

@@ -22,20 +22,26 @@ OBJECTS_DIR = ../build
 # Source settings
 HEADERS += mainwindow.h \
            connectioneditor.h \
+           remoteviewer.h \
            macroeditor.h \
+           udpreceiverwidget.h \
            textmacrowidget.h \
            udpsender.h \
            udpreceiver.h
 
 SOURCES += main.cpp \
-           connectioneditor.cpp \
            mainwindow.cpp \
+           connectioneditor.cpp \
+           remoteviewer.cpp \
            macroeditor.cpp \
+           udpreceiverwidget.cpp \
            textmacrowidget.cpp \
            udpsender.cpp \
            udpreceiver.cpp
 
 FORMS += mainwindow.ui \
          connectioneditor.ui \
+         remoteviewer.ui \
          macroeditor.ui \
+         udpreceiverwidget.ui \
          textmacrowidget.ui

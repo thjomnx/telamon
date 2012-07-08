@@ -4,8 +4,9 @@
 #include <QMainWindow>
 
 #include "ui_mainwindow.h"
-#include "macroeditor.h"
 #include "connectioneditor.h"
+#include "remoteviewer.h"
+#include "macroeditor.h"
 
 class MainWindow : public QMainWindow, public Ui::MainWindow
 {
@@ -26,10 +27,12 @@ private:
     void makeConnections();
 
     ConnectionEditor *connectionEditor;
+    RemoteViewer *remoteViewer;
     MacroEditor *macroEditor;
 
     QAction *action_Quit;
     QAction *action_ConnectionEditor;
+    QAction *action_RemoteViewer;
     QAction *action_MacroEditor;
     QAction *action_AboutBox;
 };
