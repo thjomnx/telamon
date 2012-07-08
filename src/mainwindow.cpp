@@ -16,13 +16,15 @@ MainWindow::MainWindow()
     makeConnections();
 
 #ifdef DEBUG
-    action_MacroEditor->trigger();
+    action_ConnectionEditor->trigger();
+    //action_MacroEditor->trigger();
 #endif
 }
 
 MainWindow::~MainWindow()
 {
     delete macroEditor;
+    delete connectionEditor;
 }
 
 void MainWindow::showAboutBox()
@@ -33,6 +35,9 @@ void MainWindow::showAboutBox()
 
 void MainWindow::createChilds()
 {
+    connectionEditor = new ConnectionEditor(this);
+    connectionEditor->hide();
+
     macroEditor = new MacroEditor(this);
     macroEditor->hide();
 }
@@ -42,6 +47,11 @@ void MainWindow::createActions()
     action_Quit = new QAction(tr("&Quit"), this);
     action_Quit->setShortcut(QKeySequence::Quit);
     action_Quit->setStatusTip(tr("Terminate all sessions and quit the application"));
+
+    action_ConnectionEditor = new QAction(tr("&Connection Editor"), this);
+    action_ConnectionEditor->setCheckable(true);
+    action_ConnectionEditor->setShortcut(tr("Ctrl+C"));
+    action_ConnectionEditor->setStatusTip(tr("Show or hide the connection editor"));
 
     action_MacroEditor = new QAction(tr("&Macro Editor"), this);
     action_MacroEditor->setCheckable(true);
@@ -55,7 +65,10 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
     menu_File->addAction(action_Quit);
+
+    menu_View->addAction(action_ConnectionEditor);
     menu_View->addAction(action_MacroEditor);
+
     menu_Help->addAction(action_AboutBox);
 }
 
@@ -64,6 +77,7 @@ void MainWindow::makeConnections()
     connect(macroEditor, SIGNAL(visibilityChanged(bool)), action_MacroEditor, SLOT(setChecked(bool)));
 
     connect(action_Quit, SIGNAL(triggered(bool)), this, SLOT(close()));
+    connect(action_ConnectionEditor, SIGNAL(triggered(bool)), connectionEditor, SLOT(setVisible(bool)));
     connect(action_MacroEditor, SIGNAL(triggered(bool)), macroEditor, SLOT(setVisible(bool)));
     connect(action_AboutBox, SIGNAL(triggered(bool)), this, SLOT(showAboutBox()));
 }

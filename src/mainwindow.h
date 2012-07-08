@@ -5,6 +5,7 @@
 
 #include "ui_mainwindow.h"
 #include "macroeditor.h"
+#include "connectioneditor.h"
 
 class MainWindow : public QMainWindow, public Ui::MainWindow
 {
@@ -24,9 +25,11 @@ private:
 
     void makeConnections();
 
+    ConnectionEditor *connectionEditor;
     MacroEditor *macroEditor;
 
     QAction *action_Quit;
+    QAction *action_ConnectionEditor;
     QAction *action_MacroEditor;
     QAction *action_AboutBox;
 };
