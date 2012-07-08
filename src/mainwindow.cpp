@@ -74,6 +74,7 @@ void MainWindow::createMenus()
 
 void MainWindow::makeConnections()
 {
+    connect(connectionEditor, SIGNAL(visibilityChanged(bool)), action_ConnectionEditor, SLOT(setChecked(bool)));
     connect(macroEditor, SIGNAL(visibilityChanged(bool)), action_MacroEditor, SLOT(setChecked(bool)));
 
     connect(action_Quit, SIGNAL(triggered(bool)), this, SLOT(close()));
