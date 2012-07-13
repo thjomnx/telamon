@@ -31,7 +31,7 @@ void ConnectionEditor::addConnection()
 
     qDebug() << "addConnection():" << urw;
 
-    QVBoxLayout* layout = static_cast<QVBoxLayout*>(scrollAreaWidgetContents->layout());
+    QBoxLayout* layout = static_cast<QBoxLayout*>(scrollAreaWidgetContents->layout());
     layout->insertWidget(list.count(), urw);
 }
 

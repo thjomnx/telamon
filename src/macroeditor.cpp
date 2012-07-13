@@ -40,7 +40,7 @@ void MacroEditor::addMacroBox()
 
     qDebug() << "addMacroBox():" << tmw;
 
-    QVBoxLayout* layout = static_cast<QVBoxLayout*>(scrollAreaWidgetContents->layout());
+    QBoxLayout* layout = static_cast<QBoxLayout*>(scrollAreaWidgetContents->layout());
     layout->insertWidget(list.count(), tmw);
 
     if (list.count() == 0)
@@ -66,7 +66,7 @@ void MacroEditor::removeMacroBox()
 
         qDebug() << "removeMacroBox():" << tmw;
 
-        QVBoxLayout* layout = static_cast<QVBoxLayout*>(scrollAreaWidgetContents->layout());
+        QLayout* layout = static_cast<QLayout*>(scrollAreaWidgetContents->layout());
         layout->removeWidget(tmw);
 
         delete tmw;
