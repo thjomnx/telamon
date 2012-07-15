@@ -40,12 +40,15 @@ FORMS += mainwindow.ui \
          textmacrowidget.ui
 
 # UDP sources
-HEADERS += udp/udpreceiverwidget.h \
+HEADERS += udp/udpreceiverconfigdialog.h \
+           udp/udpreceiverwidget.h \
            udp/udpsender.h \
            udp/udpreceiver.h
 
-SOURCES += udp/udpreceiverwidget.cpp \
+SOURCES += udp/udpreceiverconfigdialog.cpp \
+           udp/udpreceiverwidget.cpp \
            udp/udpsender.cpp \
            udp/udpreceiver.cpp
 
-FORMS += udp/udpreceiverwidget.ui
+FORMS += udp/udpreceiverconfigdialog.ui \
+         udp/udpreceiverwidget.ui
