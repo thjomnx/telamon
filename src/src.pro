@@ -3,13 +3,13 @@
 ######################################################################
 
 # Target settings
-TEMPLATE = app
 TARGET = telamon
+TEMPLATE = app
 DESTDIR = ../bin
-INCLUDEPATH += .
+INCLUDEPATH += . udp
 
 # Qt settings
-QT += network
+QT += core gui network
 CONFIG += qt debug warn_on
 
 # Build settings
@@ -19,29 +19,33 @@ MOC_DIR = ../build/moc
 RCC_DIR = ../build/rcc
 OBJECTS_DIR = ../build
 
-# Source settings
+# Main sources
 HEADERS += mainwindow.h \
            connectioneditor.h \
            remoteviewer.h \
            macroeditor.h \
-           udpreceiverwidget.h \
-           textmacrowidget.h \
-           udpsender.h \
-           udpreceiver.h
+           textmacrowidget.h
 
 SOURCES += main.cpp \
            mainwindow.cpp \
            connectioneditor.cpp \
            remoteviewer.cpp \
            macroeditor.cpp \
-           udpreceiverwidget.cpp \
-           textmacrowidget.cpp \
-           udpsender.cpp \
-           udpreceiver.cpp
+           textmacrowidget.cpp
 
 FORMS += mainwindow.ui \
          connectioneditor.ui \
          remoteviewer.ui \
          macroeditor.ui \
-         udpreceiverwidget.ui \
          textmacrowidget.ui
+
+# UDP sources
+HEADERS += udp/udpreceiverwidget.h \
+           udp/udpsender.h \
+           udp/udpreceiver.h
+
+SOURCES += udp/udpreceiverwidget.cpp \
+           udp/udpsender.cpp \
+           udp/udpreceiver.cpp
+
+FORMS += udp/udpreceiverwidget.ui
