@@ -6,7 +6,7 @@
 TARGET = telamon
 TEMPLATE = app
 DESTDIR = ../bin
-INCLUDEPATH += . udp
+INCLUDEPATH += . udp utils
 
 # Qt settings
 QT += core gui network
@@ -38,6 +38,11 @@ FORMS += mainwindow.ui \
          remoteviewer.ui \
          macroeditor.ui \
          textmacrowidget.ui
+
+# Utility sources
+HEADERS += utils/ipaddressvalidator.h
+
+SOURCES += utils/ipaddressvalidator.cpp
 
 # UDP sources
 HEADERS += udp/udpreceiverconfigdialog.h \

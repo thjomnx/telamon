@@ -10,7 +10,7 @@ class UdpReceiverWidget : public QWidget, public Ui::UdpReceiverWidget
     Q_OBJECT
 
 public:
-    UdpReceiverWidget(QWidget *parent = 0);
+    explicit UdpReceiverWidget(QWidget *parent = 0);
     virtual ~UdpReceiverWidget();
 };
 

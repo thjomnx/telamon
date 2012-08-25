@@ -11,7 +11,7 @@ class ConnectionEditor : public QDockWidget, public Ui::ConnectionEditor
     Q_OBJECT
 
 public:
-    ConnectionEditor(QWidget *parent = 0);
+    explicit ConnectionEditor(QWidget *parent = 0);
     virtual ~ConnectionEditor();
 
 private slots:

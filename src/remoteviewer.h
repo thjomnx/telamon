@@ -10,7 +10,7 @@ class RemoteViewer : public QDockWidget, public Ui::RemoteViewer
     Q_OBJECT
 
 public:
-    RemoteViewer(QWidget *parent = 0);
+    explicit RemoteViewer(QWidget *parent = 0);
     virtual ~RemoteViewer();
 };
 

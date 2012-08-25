@@ -1,6 +1,7 @@
 #include <QtGui>
 
 #include "connectioneditor.h"
+#include "udpreceiverconfigdialog.h"
 
 ConnectionEditor::ConnectionEditor(QWidget *parent)
     : QDockWidget(parent)
@@ -26,13 +27,18 @@ void ConnectionEditor::makeConnections()
 
 void ConnectionEditor::addConnection()
 {
-    QList<UdpReceiverWidget*> list = scrollAreaWidgetContents->findChildren<UdpReceiverWidget*>();
-    UdpReceiverWidget *urw = new UdpReceiverWidget(this);
+    UdpReceiverConfigDialog dlg(this);
 
-    qDebug() << "addConnection():" << urw;
+    if (dlg.exec())
+    {
+        QList<UdpReceiverWidget*> list = scrollAreaWidgetContents->findChildren<UdpReceiverWidget*>();
+        UdpReceiverWidget *urw = new UdpReceiverWidget(this);
 
-    QBoxLayout* layout = static_cast<QBoxLayout*>(scrollAreaWidgetContents->layout());
-    layout->insertWidget(list.count(), urw);
+        qDebug() << "addConnection():" << urw;
+
+        QBoxLayout* layout = static_cast<QBoxLayout*>(scrollAreaWidgetContents->layout());
+        layout->insertWidget(list.count(), urw);
+    }
 }
 
 void ConnectionEditor::removeConnection()

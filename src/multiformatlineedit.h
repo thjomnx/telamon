@@ -8,7 +8,7 @@ class MultiFormatLineEdit : public QLineEdit
     Q_OBJECT
 
 public:
-    MultiFormatLineEdit(QWidget *parent = 0);
+    explicit MultiFormatLineEdit(QWidget *parent = 0);
     MultiFormatLineEdit(const QString& , QWidget *parent = 0);
 };
 
