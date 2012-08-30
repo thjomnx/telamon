@@ -30,8 +30,20 @@ void UdpReceiverConfigDialog::makeConnections()
     connect(buttonBox_OkCancel, SIGNAL(rejected()), this, SLOT(reject()));
 }
 
-void UdpReceiverConfigDialog::on_comboBox_Address_editTextChanged()
+void UdpReceiverConfigDialog::updateUi()
 {
     bool valid = comboBox_Address->lineEdit()->hasAcceptableInput();
+    valid &= spinBox_Port->value() > 0 ? true : false;
+
     buttonBox_OkCancel->button(QDialogButtonBox::Ok)->setEnabled(valid);
+}
+
+void UdpReceiverConfigDialog::on_comboBox_Address_editTextChanged()
+{
+    updateUi();
+}
+
+void UdpReceiverConfigDialog::on_spinBox_Port_valueChanged()
+{
+    updateUi();
 }

@@ -13,12 +13,15 @@ public:
     UdpReceiverConfigDialog(QWidget *parent = 0, Qt::WindowFlags f = 0);
     virtual ~UdpReceiverConfigDialog();
 
+private slots:
+    void on_comboBox_Address_editTextChanged();
+    void on_spinBox_Port_valueChanged();
+
 private:
     void initUi();
     void makeConnections();
 
-private slots:
-    void on_comboBox_Address_editTextChanged();
+    void updateUi();
 };
 
 #endif // UDPRECEIVERCONFIGDIALOG_H

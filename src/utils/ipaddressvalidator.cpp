@@ -26,7 +26,7 @@ QValidator::State IpAddressValidator::validate(QString &input, int &pos) const
         return Invalid;
     }
 
-    bool emptyGroup = false;
+    bool emptyBlock = false;
 
     for (int i = 0; i < s; i++)
     {
@@ -34,7 +34,7 @@ QValidator::State IpAddressValidator::validate(QString &input, int &pos) const
 
         if (slist[i].isEmpty())
         {
-            emptyGroup = true;
+            emptyBlock = true;
             continue;
         }
 
@@ -46,7 +46,7 @@ QValidator::State IpAddressValidator::validate(QString &input, int &pos) const
         }
     }
 
-    if (s < 4 || emptyGroup)
+    if (s < 4 || emptyBlock)
     {
         return Intermediate;
     }

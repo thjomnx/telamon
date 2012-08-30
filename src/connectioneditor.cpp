@@ -1,6 +1,7 @@
 #include <QtGui>
 
 #include "connectioneditor.h"
+#include "udpreceiverwidget.h"
 #include "udpreceiverconfigdialog.h"
 
 ConnectionEditor::ConnectionEditor(QWidget *parent)
