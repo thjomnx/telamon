@@ -13,11 +13,11 @@ QT += core gui network
 CONFIG += qt debug warn_on
 
 # Build settings
-DESTDIR = ../bin
-UI_DIR = ../build/ui
-MOC_DIR = ../build/moc
-RCC_DIR = ../build/rcc
-OBJECTS_DIR = ../build
+DESTDIR = ../bin/telamon
+UI_DIR = ../build/telamon/ui
+MOC_DIR = ../build/telamon/moc
+RCC_DIR = ../build/telamon/rcc
+OBJECTS_DIR = ../build/telamon
 
 # Main sources
 HEADERS += mainwindow.h \
