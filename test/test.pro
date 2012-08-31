@@ -15,6 +15,6 @@ OBJECTS_DIR = ../build/telamon-test
 SOURCES = procedures/hostaddressvalidatortest.cpp
 
 # Unit sources
-HEADERS += ../src/utils/ipaddressvalidator.h
+HEADERS += ../src/utils/hostaddressvalidator.h
 
-SOURCES += ../src/utils/ipaddressvalidator.cpp
+SOURCES += ../src/utils/hostaddressvalidator.cpp

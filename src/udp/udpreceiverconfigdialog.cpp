@@ -1,7 +1,7 @@
 #include <QtGui>
 
 #include "udpreceiverconfigdialog.h"
-#include "ipaddressvalidator.h"
+#include "hostaddressvalidator.h"
 
 UdpReceiverConfigDialog::UdpReceiverConfigDialog(QWidget *parent, Qt::WindowFlags f)
     : QDialog(parent, f)
@@ -20,7 +20,7 @@ void UdpReceiverConfigDialog::initUi()
 {
     buttonBox_OkCancel->button(QDialogButtonBox::Ok)->setEnabled(false);
 
-    QValidator *validator = new IpAddressValidator(this);
+    QValidator *validator = new HostAddressValidator(this);
     comboBox_Address->setValidator(validator);
 }
 

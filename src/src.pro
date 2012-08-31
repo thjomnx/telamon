@@ -40,9 +40,9 @@ FORMS += mainwindow.ui \
          textmacrowidget.ui
 
 # Utility sources
-HEADERS += utils/ipaddressvalidator.h
+HEADERS += utils/hostaddressvalidator.h
 
-SOURCES += utils/ipaddressvalidator.cpp
+SOURCES += utils/hostaddressvalidator.cpp
 
 # UDP sources
 HEADERS += udp/udpreceiverconfigdialog.h \

@@ -1,19 +1,19 @@
 #include <QStringList>
 #include <QDebug>
 
-#include "ipaddressvalidator.h"
+#include "hostaddressvalidator.h"
 
-IpAddressValidator::IpAddressValidator(QObject *parent)
+HostAddressValidator::HostAddressValidator(QObject *parent)
     : QValidator(parent)
 {
     mode = Ipv4ValidatorMode;
 }
 
-IpAddressValidator::~IpAddressValidator()
+HostAddressValidator::~HostAddressValidator()
 {
 }
 
-QValidator::State IpAddressValidator::validate(QString &input, int &pos) const
+QValidator::State HostAddressValidator::validate(QString &input, int &pos) const
 {
     if (input.isEmpty())
     {
@@ -32,7 +32,7 @@ QValidator::State IpAddressValidator::validate(QString &input, int &pos) const
 
 
 
-QValidator::State IpAddressValidator::validateIpv4(QString& input) const
+QValidator::State HostAddressValidator::validateIpv4(QString& input) const
 {
     QStringList slist = input.split(".");
     int s = slist.size();
@@ -70,7 +70,7 @@ QValidator::State IpAddressValidator::validateIpv4(QString& input) const
     return Acceptable;
 }
 
-QValidator::State IpAddressValidator::validateIpv6(QString& input) const
+QValidator::State HostAddressValidator::validateIpv6(QString& input) const
 {
     QStringList list = input.split(':');
     int length = list.size();

@@ -1,9 +1,9 @@
-#ifndef IPADDRESSVALIDATOR_H
-#define IPADDRESSVALIDATOR_H
+#ifndef HOSTADDRESSVALIDATOR_H
+#define HOSTADDRESSVALIDATOR_H
 
 #include <QValidator>
 
-class IpAddressValidator : public QValidator
+class HostAddressValidator : public QValidator
 {
 
 public:
@@ -13,8 +13,8 @@ public:
         Ipv6ValidatorMode
     };
 
-    explicit IpAddressValidator(QObject *parent = 0);
-    virtual ~IpAddressValidator();
+    explicit HostAddressValidator(QObject *parent = 0);
+    virtual ~HostAddressValidator();
 
     void fixup(QString &) const {};
     QValidator::State validate(QString &input, int &pos) const;
@@ -29,4 +29,4 @@ private:
     ValidatorMode mode;
 };
 
-#endif // IPADDRESSVALIDATOR_H
+#endif // HOSTADDRESSVALIDATOR_H

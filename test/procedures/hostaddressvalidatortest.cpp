@@ -1,7 +1,7 @@
 #include <QtTest/QtTest>
 #include <QValidator>
 
-#include "ipaddressvalidator.h"
+#include "hostaddressvalidator.h"
 
 class HostAddressValidatorTest : public QObject
 {
@@ -16,13 +16,13 @@ private slots:
 private:
     QValidator::State validationWrapper(QString input);
 
-    IpAddressValidator *validator;
+    HostAddressValidator *validator;
 };
 
 void HostAddressValidatorTest::initTestCase()
 {
-    validator = new IpAddressValidator(this);
-    validator->setValidatorMode(IpAddressValidator::Ipv6ValidatorMode);
+    validator = new HostAddressValidator(this);
+    validator->setValidatorMode(HostAddressValidator::Ipv6ValidatorMode);
 }
 
 void HostAddressValidatorTest::cleanupTestCase()
