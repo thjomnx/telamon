@@ -1,12 +1,11 @@
 #include <QStringList>
-#include <QDebug>
 
 #include "hostaddressvalidator.h"
 
 HostAddressValidator::HostAddressValidator(QObject *parent)
     : QValidator(parent)
 {
-    mode = Ipv6ValidatorMode;
+    mode = Ipv4ValidatorMode;
 }
 
 HostAddressValidator::~HostAddressValidator()
@@ -17,7 +16,6 @@ QValidator::State HostAddressValidator::validate(QString &input, int &pos) const
 {
     if (input.isEmpty())
     {
-        qDebug() << "--> Result: Intermediate";
         return Intermediate;
     }
 
@@ -38,7 +36,6 @@ QValidator::State HostAddressValidator::validateIpv4(QString &input) const
 
     if (s > 4)
     {
-        qDebug() << "--> IPv4 result: Invalid";
         return Invalid;
     }
 
@@ -58,41 +55,33 @@ QValidator::State HostAddressValidator::validateIpv4(QString &input) const
 
         if (!ok || val < 0 || val > 255)
         {
-            qDebug() << "--> IPv4 result: Invalid";
             return Invalid;
         }
     }
 
     if (s < 4 || emptyBlock)
     {
-        qDebug() << "--> IPv4 result: Intermediate";
         return Intermediate;
     }
 
-    qDebug() << "--> IPv4 result: Acceptable";
     return Acceptable;
 }
 
 QValidator::State HostAddressValidator::validateIpv6(QString &input) const
 {
-    qDebug() << "Analyzing input: " << input;
-
     QStringList list = input.split(':');
     int length = list.size();
 
     // Check total number of blocks
     if (length > 8)
     {
-        qDebug() << "--> IPv6 result: Invalid";
         return Invalid;
     }
 
-    int start = 0;
-    int end = length;
-    int numBlocks = 0;
-    int emptyBlock = -1;
-
-    bool ipv4Trail = false;
+    ushort startIdx = 0;
+    ushort endIdx = length;
+    short emptyBlockIdx = -1;
+    ushort numNonEmptyBlocks = 0;
     State ipv4Result = Acceptable;
 
     if (length > 2)
@@ -100,72 +89,59 @@ QValidator::State HostAddressValidator::validateIpv6(QString &input) const
         // Check for compressed head
         if (list[0].isEmpty() && list[1].isEmpty())
         {
-            qDebug() << "Head is compressed";
-            start += 2;
+            startIdx += 2;
         }
         else
         {
             // Check for compressed tail
             if (list[length - 2].isEmpty() && list[length - 1].isEmpty())
             {
-                qDebug() << "Tail is compressed";
-                end -= 2;
+                endIdx -= 2;
             }
         }
     }
 
-    for (int i = start; i < end; i++)
+    for (int i = startIdx; i < endIdx; i++)
     {
-        qDebug() << "Checking " << list[i] << "[" << list[i].length() << "]";
-
         bool ok;
 
         // Check for empty blocks
         if (list[i].isEmpty())
         {
-            if (length > 3 && (start > 0 || end < length))
+            if (length > 3 && (startIdx > 0 || endIdx < length))
             {
-                qDebug() << "Empty block found after compressed head/tail at index" << i;
-                qDebug() << "--> IPv6 result: Intermediate";
                 return Intermediate;
             }
             else
             {
-                if (emptyBlock > -1)
+                if (emptyBlockIdx > -1)
                 {
-                    qDebug() << "Second empty block found at index" << i;
-                    qDebug() << "--> IPv6 result: Intermediate";
                     return Intermediate;
                 }
 
-                emptyBlock = i;
+                emptyBlockIdx = i;
 
                 continue;
             }
         }
 
         // Check for possible trailing IPv4 block
-        ipv4Trail = i == end - 1 && list[i].contains('.');
-
-        if (ipv4Trail)
+        if (i == endIdx - 1 && list[i].contains('.'))
         {
-            // Validate IPv4 block characters
             ipv4Result = validateIpv4(list[i]);
 
             if (ipv4Result == Invalid)
             {
-                qDebug() << "--> IPv6 result: Invalid";
                 return Invalid;
             }
 
-            numBlocks++;
+            numNonEmptyBlocks++;
         }
         else
         {
             // Validate IPv6 block length
             if (list[i].length() > 4)
             {
-                qDebug() << "--> IPv6 result: Invalid";
                 return Invalid;
             }
 
@@ -174,44 +150,38 @@ QValidator::State HostAddressValidator::validateIpv6(QString &input) const
 
             if (!ok || value < 0 || value > 65535)
             {
-                qDebug() << "--> IPv6 result: Invalid";
                 return Invalid;
             }
 
-            numBlocks++;
+            numNonEmptyBlocks++;
         }
     }
 
-    // Check for minimum blocks and IPv4 result
+    // Check for minimum block count and IPv4 result
     if (length < 3 || ipv4Result == Intermediate)
     {
-        qDebug() << "--> IPv6 result: Intermediate";
         return Intermediate;
     }
 
-    if (start == 0 && end == length)
+    if (startIdx == 0 && endIdx == length)
     {
-        qDebug() << "Index of single empty block:" << emptyBlock;
-        qDebug() << "Total number of blocks:" << numBlocks;
-
-        if (emptyBlock == 0 || emptyBlock == length - 1)
+        // Check for leading and trailing single empty blocks
+        if (emptyBlockIdx == 0 || emptyBlockIdx == length - 1)
         {
-            qDebug() << "--> IPv6 result: Intermediate";
             return Intermediate;
         }
         else
         {
-            if (emptyBlock == -1)
+            // Check for total number of non-empty blocks
+            if (emptyBlockIdx == -1)
             {
-                if (numBlocks < 8)
+                if (numNonEmptyBlocks < 8)
                 {
-                    qDebug() << "--> IPv6 result: Intermediate";
                     return Intermediate;
                 }
             }
         }
     }
 
-    qDebug() << "--> IPv6 result: Acceptable";
     return Acceptable;
 }

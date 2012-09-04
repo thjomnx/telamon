@@ -5,6 +5,7 @@
 
 class HostAddressValidator : public QValidator
 {
+    Q_OBJECT
 
 public:
     enum ValidatorMode
