@@ -18,6 +18,8 @@ private slots:
     void test_Ipv6_UniqueLocalUnicast();
     void test_Ipv6_Multicast();
     void test_Ipv6_GlobalUnicast();
+    void test_Ipv6_Ipv4Suffix();
+    void test_Ipv6_Junk();
 
 private:
     void initIpv4();
@@ -114,13 +116,19 @@ void HostAddressValidatorTest::test_Ipv6_Linklocal()
     QCOMPARE(validationWrapper("fe80:0000:0000:0000:0000:0000:0000:0000:"), QValidator::Invalid);
     QCOMPARE(validationWrapper("fe80:0000:0000:0000:0000:0000:0000:0000::"), QValidator::Invalid);
     QCOMPARE(validationWrapper("fe80:0000:0000:0000:0000:0000:0000:0000:0000"), QValidator::Invalid);
-
-    QCOMPARE(validationWrapper("fe80::217:f2ff:fe07:ed62"), QValidator::Acceptable);
 }
 
 void HostAddressValidatorTest::test_Ipv6_UniqueLocalUnicast()
 {
     initIpv6();
+
+    QCOMPARE(validationWrapper("FC00::101"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("FC00:0:0:0:0:0:0:101"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("FC00::101::2"), QValidator::Intermediate);
+
+    QCOMPARE(validationWrapper("fc00::101"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("fc00:0:0:0:0:0:0:101"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("fc00::101::2"), QValidator::Intermediate);
 }
 
 void HostAddressValidatorTest::test_Ipv6_Multicast()
@@ -130,6 +138,10 @@ void HostAddressValidatorTest::test_Ipv6_Multicast()
     QCOMPARE(validationWrapper("FF01::101"), QValidator::Acceptable);
     QCOMPARE(validationWrapper("FF01:0:0:0:0:0:0:101"), QValidator::Acceptable);
     QCOMPARE(validationWrapper("FF01::101::2"), QValidator::Intermediate);
+
+    QCOMPARE(validationWrapper("ff01::101"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("ff01:0:0:0:0:0:0:101"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("ff01::101::2"), QValidator::Intermediate);
 }
 
 void HostAddressValidatorTest::test_Ipv6_GlobalUnicast()
@@ -140,15 +152,83 @@ void HostAddressValidatorTest::test_Ipv6_GlobalUnicast()
     QCOMPARE(validationWrapper("2001:DB8::8:800:200C:417A"), QValidator::Acceptable);
     QCOMPARE(validationWrapper("2001:DB8:0:0:8:800:200C:417A:221"), QValidator::Invalid);
 
-    QCOMPARE(validationWrapper("02001:0000:1234:0000:0000:C1C0:ABCD:0876"), QValidator::Invalid);
-    QCOMPARE(validationWrapper("2001:0000:1234:0000:00001:C1C0:ABCD:0876"), QValidator::Invalid);
-    QCOMPARE(validationWrapper(" 2001:0000:1234:0000:0000:C1C0:ABCD:0876"), QValidator::Invalid);
-    QCOMPARE(validationWrapper("2001:0000:1234:0000:0000:C1C0:ABCD:0876 "), QValidator::Invalid);
-    QCOMPARE(validationWrapper(" 2001:0000:1234:0000:0000:C1C0:ABCD:0876  "), QValidator::Invalid);
-    QCOMPARE(validationWrapper("2001:0000:1234:0000:0000:C1C0:ABCD:0876  0"), QValidator::Invalid);
-    QCOMPARE(validationWrapper("2001:0000:1234: 0000:0000:C1C0:ABCD:0876"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("2001:db8:0:0:8:800:200c:417a"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("2001:db8::8:800:200c:417a"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("2001:db8:0:0:8:800:200c:417a:221"), QValidator::Invalid);
+}
 
-    QCOMPARE(validationWrapper("2001:0000:1234:0000:0000:C1C0:ABCD:127.0.0.1"), QValidator::Acceptable);
+void HostAddressValidatorTest::test_Ipv6_Ipv4Suffix()
+{
+    QCOMPARE(validationWrapper("::0.0.0.1"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("::127.0.0.1"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("::abcd:127.0.0.1"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("::1234:5678:127.0.0.1"), QValidator::Acceptable);
+    QCOMPARE(validationWrapper("fe80::127.0.0.1"), QValidator::Acceptable);
+
+    QCOMPARE(validationWrapper("::0.0.0."), QValidator::Intermediate);
+    QCOMPARE(validationWrapper("::127.0..1"), QValidator::Intermediate);
+    QCOMPARE(validationWrapper("::abcd:127..0.1"), QValidator::Intermediate);
+    QCOMPARE(validationWrapper("::1234:5678:.0.0.1"), QValidator::Intermediate);
+    QCOMPARE(validationWrapper("ff01::127."), QValidator::Intermediate);
+}
+
+void HostAddressValidatorTest::test_Ipv6_Junk()
+{
+    initIpv6();
+
+    QCOMPARE(validationWrapper("fe80::^"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::°"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::!"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::\""), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::²"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::³"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::§"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::$"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::%"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::&"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::/"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::("), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::)"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::["), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::]"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::{"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::}"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::\\"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::="), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::?"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::´"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::`"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::#"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::'"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::+"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::*"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::~"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::;"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::,"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::_"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::-"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::."), QValidator::Intermediate);
+    QCOMPARE(validationWrapper("fe80::ä"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::ö"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::ü"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::ß"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::<"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::>"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("fe80::|"), QValidator::Invalid);
+
+    QCOMPARE(validationWrapper("ddki:"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("123m"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("k4:6fi:"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("12345"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("1:2:3:4:5:6:7:8:9"), QValidator::Invalid);
+
+    QCOMPARE(validationWrapper("02001:0000:1234:0000:0000:C1C0:ABCD:0876"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("2001:0000:1234:0000:00001:c1c0:abcd:0876"), QValidator::Invalid);
+    QCOMPARE(validationWrapper(" 2001:0000:1234:0000:0000:C1c0:aBcD:0876"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("2001:0000:1234:0000:0000:c1C0:AbCd:0876 "), QValidator::Invalid);
+    QCOMPARE(validationWrapper(" 2001:0000:1234:0000:0000:C1C0:abcD:0876  "), QValidator::Invalid);
+    QCOMPARE(validationWrapper("2001:0000:1234:0000:0000:C1c0:aBcd:0876  0"), QValidator::Invalid);
+    QCOMPARE(validationWrapper("2001:0000:1234: 0000:0000:c1c0:ABcD:0876"), QValidator::Invalid);
 }
 
 QTEST_MAIN(HostAddressValidatorTest)
