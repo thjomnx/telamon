@@ -14,13 +14,14 @@ UdpReceiverConfigDialog::UdpReceiverConfigDialog(QWidget *parent, Qt::WindowFlag
 
 UdpReceiverConfigDialog::~UdpReceiverConfigDialog()
 {
+    delete validator;
 }
 
 void UdpReceiverConfigDialog::initUi()
 {
     buttonBox_OkCancel->button(QDialogButtonBox::Ok)->setEnabled(false);
 
-    QValidator *validator = new HostAddressValidator(this);
+    validator = new HostAddressValidator(this);
     comboBox_Address->setValidator(validator);
 }
 
@@ -36,6 +37,18 @@ void UdpReceiverConfigDialog::updateUi()
     valid &= spinBox_Port->value() > 0 ? true : false;
 
     buttonBox_OkCancel->button(QDialogButtonBox::Ok)->setEnabled(valid);
+}
+
+void UdpReceiverConfigDialog::on_radioButton_Ipv4_clicked()
+{
+    validator->setValidatorMode(HostAddressValidator::Ipv4ValidatorMode);
+    comboBox_Address->lineEdit()->clear();
+}
+
+void UdpReceiverConfigDialog::on_radioButton_Ipv6_clicked()
+{
+    validator->setValidatorMode(HostAddressValidator::Ipv6ValidatorMode);
+    comboBox_Address->lineEdit()->clear();
 }
 
 void UdpReceiverConfigDialog::on_comboBox_Address_editTextChanged()
