@@ -31,7 +31,7 @@ QValidator::State HostAddressValidator::validate(QString &input, int &pos) const
 
 QValidator::State HostAddressValidator::validateIpv4(QString &input) const
 {
-    QStringList slist = input.split(".");
+    QStringList slist = input.split('.');
     int s = slist.size();
 
     if (s > 4)
