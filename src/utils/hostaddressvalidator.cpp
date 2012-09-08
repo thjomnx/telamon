@@ -31,35 +31,38 @@ QValidator::State HostAddressValidator::validate(QString &input, int &pos) const
 
 QValidator::State HostAddressValidator::validateIpv4(QString &input) const
 {
-    QStringList slist = input.split('.');
-    int s = slist.size();
+    QStringList list = input.split('.');
+    int length = list.size();
 
-    if (s > 4)
+    // Check total number of blocks
+    if (length > 4)
     {
         return Invalid;
     }
 
     bool emptyBlock = false;
 
-    for (int i = 0; i < s; i++)
+    for (int i = 0; i < length; i++)
     {
-        bool ok;
-
-        if (slist[i].isEmpty())
+        // Check for empty blocks
+        if (list[i].isEmpty())
         {
             emptyBlock = true;
             continue;
         }
 
-        int val = slist[i].toInt(&ok);
+        // Validate IPv4 block value
+        bool ok;
+        int value = list[i].toInt(&ok);
 
-        if (!ok || val < 0 || val > 255)
+        if (!ok || value < 0 || value > 255)
         {
             return Invalid;
         }
     }
 
-    if (s < 4 || emptyBlock)
+    // Check for minimum block count
+    if (length < 4 || emptyBlock)
     {
         return Intermediate;
     }
@@ -103,8 +106,6 @@ QValidator::State HostAddressValidator::validateIpv6(QString &input) const
 
     for (int i = startIdx; i < endIdx; i++)
     {
-        bool ok;
-
         // Check for empty blocks
         if (list[i].isEmpty())
         {
@@ -145,7 +146,8 @@ QValidator::State HostAddressValidator::validateIpv6(QString &input) const
                 return Invalid;
             }
 
-            // Validate IPv6 block characters
+            // Validate IPv6 block value
+            bool ok;
             int value = list[i].toInt(&ok, 16);
 
             if (!ok || value < 0 || value > 65535)
