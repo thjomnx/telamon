@@ -8,7 +8,7 @@ mainapp="$basedir/bin/telamon/telamon"
 testapp="$basedir/bin/telamon-test/test"
 
 # Change working directory
-cd $workdir/..
+cd $basedir
 
 # Clean old build remnants and targets
 make distclean &> /dev/null
