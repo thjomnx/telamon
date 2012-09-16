@@ -81,10 +81,10 @@ QValidator::State HostAddressValidator::validateIpv6(QString &input) const
         return Invalid;
     }
 
-    uint startIdx = 0;
-    uint endIdx = length;
+    int startIdx = 0;
+    int endIdx = length;
     int emptyBlockIdx = -1;
-    uint numNonEmptyBlocks = 0;
+    int numNonEmptyBlocks = 0;
     State ipv4Result = Acceptable;
 
     if (length > 2)
