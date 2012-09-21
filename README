@@ -1,14 +1,17 @@
+The name 'telamon' is short for "Teds Little Advanced Monitor".
+That's all.
 
-Some build information.
 
-######################################
+-----------------
+ BUILDING
+--------------------
 
 Build on Linux (i686/x64):
 
 $ qmake
 $ make
 
-######################################
+---
 
 Build on Windows 7 (x64):
 
@@ -17,7 +20,9 @@ Build on Windows 7 (x64):
 > qmake
 > mingw32-make
 
-######################################
 
-Author:
+-----------------
+ CONTACT
+--------------------
+
 Markus Enax <Markus.Enax@gmail.com>
