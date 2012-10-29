@@ -40,9 +40,20 @@ QValidator::State HostAddressValidator::validate(QString &input, int &pos) const
     {
         return validateIpv4(input);
     }
-    else
+    else if (mode == Ipv6ValidatorMode)
     {
         return validateIpv6(input);
+    }
+    else
+    {
+        State result = validateIpv4(input);
+
+        if (result == Invalid)
+        {
+            result = validateIpv6(input);
+        }
+
+        return result;
     }
 }
 

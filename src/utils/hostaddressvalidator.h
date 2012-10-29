@@ -28,7 +28,8 @@ public:
     enum ValidatorMode
     {
         Ipv4ValidatorMode,
-        Ipv6ValidatorMode
+        Ipv6ValidatorMode,
+        MixedValidatorMode
     };
 
     explicit HostAddressValidator(QObject *parent = 0);
