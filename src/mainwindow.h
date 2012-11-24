@@ -23,6 +23,7 @@
 #include "ui_mainwindow.h"
 #include "localendpointpanel.h"
 #include "remoteendpointpanel.h"
+#include "datasinkpanel.h"
 #include "macropanel.h"
 
 class MainWindow : public QMainWindow, public Ui::MainWindow
@@ -45,11 +46,13 @@ private:
 
     LocalEndpointPanel *localEndpointPanel;
     RemoteEndpointPanel *remoteEndpointPanel;
+    DataSinkPanel *dataSinkPanel;
     MacroPanel *macroPanel;
 
     QAction *action_Quit;
     QAction *action_LocalEndpointPanel;
     QAction *action_RemoteEndpointPanel;
+    QAction *action_DataSinkPanel;
     QAction *action_MacroPanel;
     QAction *action_AboutBox;
 };

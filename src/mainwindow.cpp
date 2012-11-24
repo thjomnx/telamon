@@ -42,6 +42,7 @@ MainWindow::MainWindow()
 MainWindow::~MainWindow()
 {
     delete macroPanel;
+    delete dataSinkPanel;
     delete remoteEndpointPanel;
     delete localEndpointPanel;
 }
@@ -60,6 +61,9 @@ void MainWindow::createChilds()
     remoteEndpointPanel = new RemoteEndpointPanel(this);
     remoteEndpointPanel->hide();
 
+    dataSinkPanel = new DataSinkPanel(this);
+    dataSinkPanel->hide();
+
     macroPanel = new MacroPanel(this);
     macroPanel->hide();
 }
@@ -72,13 +76,18 @@ void MainWindow::createActions()
 
     action_LocalEndpointPanel = new QAction(tr("&Local Endpoints"), this);
     action_LocalEndpointPanel->setCheckable(true);
-    action_LocalEndpointPanel->setShortcut(tr("Ctrl+C"));
+    action_LocalEndpointPanel->setShortcut(tr("Ctrl+L"));
     action_LocalEndpointPanel->setStatusTip(tr("Show or hide the panel for local endpoints"));
 
     action_RemoteEndpointPanel = new QAction(tr("&Remote Endpoints"), this);
     action_RemoteEndpointPanel->setCheckable(true);
     action_RemoteEndpointPanel->setShortcut(tr("Ctrl+R"));
     action_RemoteEndpointPanel->setStatusTip(tr("Show or hide the panel for remote endpoints"));
+
+    action_DataSinkPanel = new QAction(tr("&Data Sinks"), this);
+    action_DataSinkPanel->setCheckable(true);
+    action_DataSinkPanel->setShortcut(tr("Ctrl+D"));
+    action_DataSinkPanel->setStatusTip(tr("Show or hide the data sinks"));
 
     action_MacroPanel = new QAction(tr("&Macros"), this);
     action_MacroPanel->setCheckable(true);
@@ -95,6 +104,7 @@ void MainWindow::createMenus()
 
     menu_View->addAction(action_LocalEndpointPanel);
     menu_View->addAction(action_RemoteEndpointPanel);
+    menu_View->addAction(action_DataSinkPanel);
     menu_View->addAction(action_MacroPanel);
 
     menu_Help->addAction(action_AboutBox);
@@ -104,11 +114,13 @@ void MainWindow::makeConnections()
 {
     connect(localEndpointPanel, SIGNAL(visibilityChanged(bool)), action_LocalEndpointPanel, SLOT(setChecked(bool)));
     connect(remoteEndpointPanel, SIGNAL(visibilityChanged(bool)), action_RemoteEndpointPanel, SLOT(setChecked(bool)));
+    connect(dataSinkPanel, SIGNAL(visibilityChanged(bool)), action_DataSinkPanel, SLOT(setChecked(bool)));
     connect(macroPanel, SIGNAL(visibilityChanged(bool)), action_MacroPanel, SLOT(setChecked(bool)));
 
     connect(action_Quit, SIGNAL(triggered(bool)), this, SLOT(close()));
     connect(action_LocalEndpointPanel, SIGNAL(triggered(bool)), localEndpointPanel, SLOT(setVisible(bool)));
     connect(action_RemoteEndpointPanel, SIGNAL(triggered(bool)), remoteEndpointPanel, SLOT(setVisible(bool)));
+    connect(action_DataSinkPanel, SIGNAL(triggered(bool)), dataSinkPanel, SLOT(setVisible(bool)));
     connect(action_MacroPanel, SIGNAL(triggered(bool)), macroPanel, SLOT(setVisible(bool)));
     connect(action_AboutBox, SIGNAL(triggered(bool)), this, SLOT(showAboutBox()));
 }

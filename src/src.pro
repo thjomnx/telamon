@@ -40,6 +40,7 @@ OBJECTS_DIR = ../build/telamon
 HEADERS += mainwindow.h \
            localendpointpanel.h \
            remoteendpointpanel.h \
+           datasinkpanel.h \
            macropanel.h \
            textmacrowidget.h
 
@@ -47,12 +48,14 @@ SOURCES += main.cpp \
            mainwindow.cpp \
            localendpointpanel.cpp \
            remoteendpointpanel.cpp \
+           datasinkpanel.cpp \
            macropanel.cpp \
            textmacrowidget.cpp
 
 FORMS += mainwindow.ui \
          localendpointpanel.ui \
          remoteendpointpanel.ui \
+         datasinkpanel.ui \
          macropanel.ui \
          textmacrowidget.ui
 
