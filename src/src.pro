@@ -19,8 +19,11 @@
 # Project build file (qmake) for 'telamon' main sources
 #
 
+# User variables
+application = telamon
+
 # Target settings
-TARGET = telamon
+TARGET = $${application}
 TEMPLATE = app
 DESTDIR = ../bin
 INCLUDEPATH += . udp utils
@@ -30,52 +33,22 @@ QT += core gui network
 CONFIG += qt debug warn_on
 
 # Build settings
-DESTDIR = ../bin/telamon
-UI_DIR = ../build/telamon/ui
-MOC_DIR = ../build/telamon/moc
-RCC_DIR = ../build/telamon/rcc
-OBJECTS_DIR = ../build/telamon
+DESTDIR = ../bin/$${application}
+UI_DIR = ../build/$${application}/ui
+MOC_DIR = ../build/$${application}/moc
+RCC_DIR = ../build/$${application}/rcc
+OBJECTS_DIR = ../build/$${application}
 
 # Main sources
-HEADERS += maincontroller.h \
-           mainwindow.h \
-           localendpointpanel.h \
-           remoteendpointpanel.h \
-           datasinkpanel.h \
-           macropanel.h \
-           textmacrowidget.h
-
-SOURCES += main.cpp \
-           maincontroller.cpp \
-           mainwindow.cpp \
-           localendpointpanel.cpp \
-           remoteendpointpanel.cpp \
-           datasinkpanel.cpp \
-           macropanel.cpp \
-           textmacrowidget.cpp
-
-FORMS += mainwindow.ui \
-         localendpointpanel.ui \
-         remoteendpointpanel.ui \
-         datasinkpanel.ui \
-         macropanel.ui \
-         textmacrowidget.ui
+HEADERS += *.h
+SOURCES += *.cpp
+FORMS += *.ui
 
 # Utility sources
-HEADERS += utils/hostaddressvalidator.h
-
-SOURCES += utils/hostaddressvalidator.cpp
+HEADERS += utils/*.h
+SOURCES += utils/*.cpp
 
 # UDP sources
-HEADERS += udp/udpreceiverconfigdialog.h \
-           udp/udpreceiverwidget.h \
-           udp/udpsender.h \
-           udp/udpreceiver.h
-
-SOURCES += udp/udpreceiverconfigdialog.cpp \
-           udp/udpreceiverwidget.cpp \
-           udp/udpsender.cpp \
-           udp/udpreceiver.cpp
-
-FORMS += udp/udpreceiverconfigdialog.ui \
-         udp/udpreceiverwidget.ui
+HEADERS += udp/*.h
+SOURCES += udp/*.cpp
+FORMS += udp/*.ui
