@@ -34,6 +34,16 @@ UdpReceiverConfigDialog::~UdpReceiverConfigDialog()
     delete validator;
 }
 
+QString UdpReceiverConfigDialog::hostAddress() const
+{
+    return comboBox_Address->currentText().trimmed();
+}
+
+int UdpReceiverConfigDialog::portNumber() const
+{
+    return spinBox_Port->value();
+}
+
 void UdpReceiverConfigDialog::initUi()
 {
     buttonBox_OkCancel->button(QDialogButtonBox::Ok)->setEnabled(false);

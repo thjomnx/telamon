@@ -31,8 +31,8 @@ public:
     virtual ~LocalEndpointPanel();
 
 private slots:
-    void addConnection();
-    void removeConnection();
+    void addEndpoint();
+    void removeEndpoint();
 
 private:
     void initUi();

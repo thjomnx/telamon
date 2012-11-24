@@ -40,10 +40,10 @@ void LocalEndpointPanel::initUi()
 
 void LocalEndpointPanel::makeConnections()
 {
-    connect(pushButton_Add, SIGNAL(clicked(bool)), this, SLOT(addConnection()));
+    connect(pushButton_Add, SIGNAL(clicked(bool)), this, SLOT(addEndpoint()));
 }
 
-void LocalEndpointPanel::addConnection()
+void LocalEndpointPanel::addEndpoint()
 {
     UdpReceiverConfigDialog dlg(this);
 
@@ -59,6 +59,6 @@ void LocalEndpointPanel::addConnection()
     }
 }
 
-void LocalEndpointPanel::removeConnection()
+void LocalEndpointPanel::removeEndpoint()
 {
 }

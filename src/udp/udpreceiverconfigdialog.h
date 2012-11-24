@@ -32,6 +32,9 @@ public:
     UdpReceiverConfigDialog(QWidget *parent = 0, Qt::WindowFlags f = 0);
     virtual ~UdpReceiverConfigDialog();
 
+    QString hostAddress() const;
+    int portNumber() const;
+
 private slots:
     void on_radioButton_Ipv4_clicked();
     void on_radioButton_Ipv6_clicked();
