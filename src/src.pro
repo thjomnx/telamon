@@ -37,7 +37,8 @@ RCC_DIR = ../build/telamon/rcc
 OBJECTS_DIR = ../build/telamon
 
 # Main sources
-HEADERS += mainwindow.h \
+HEADERS += maincontroller.h \
+           mainwindow.h \
            localendpointpanel.h \
            remoteendpointpanel.h \
            datasinkpanel.h \
@@ -45,6 +46,7 @@ HEADERS += mainwindow.h \
            textmacrowidget.h
 
 SOURCES += main.cpp \
+           maincontroller.cpp \
            mainwindow.cpp \
            localendpointpanel.cpp \
            remoteendpointpanel.cpp \

@@ -15,19 +15,22 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
+#ifndef MAINCONTROLLER_H
+#define MAINCONTROLLER_H
 
-#include "maincontroller.h"
-#include "mainwindow.h"
+#include <QObject>
 
-MainController *controller = new MainController;
+class MainController;
 
-int main(int argc, char *argv[])
+extern MainController *controller;
+
+class MainController : public QObject
 {
-    QApplication application(argc, argv);
+    Q_OBJECT
 
-    MainWindow window;
-    window.show();
+public:
+    MainController();
+    virtual ~MainController();
+};
 
-    return application.exec();
-}
+#endif // MAINCONTROLLER_H
