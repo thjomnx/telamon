@@ -15,13 +15,18 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QLinkedList>
+
 #include "maincontroller.h"
+#include "localendpoint.h"
 
 MainController::MainController()
     : QObject()
 {
+    m_locEps = new QLinkedList<LocalEndpoint*>();
 }
 
 MainController::~MainController()
 {
+    delete m_locEps;
 }

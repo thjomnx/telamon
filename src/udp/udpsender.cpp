@@ -22,8 +22,8 @@
 
 UdpSender::UdpSender()
 {
-    _destPort = 0;
-    _socket = new QUdpSocket(this);
+    m_destPort = 0;
+    m_socket = new QUdpSocket(this);
 }
 
 UdpSender::~UdpSender()
@@ -32,22 +32,22 @@ UdpSender::~UdpSender()
 
 QHostAddress UdpSender::destAddress() const
 {
-    return _destAddress;
+    return m_destAddr;
 }
 
 void UdpSender::setDestAddress(const QHostAddress address)
 {
-    _destAddress = address;
+    m_destAddr = address;
 }
 
 quint16 UdpSender::destPort() const
 {
-    return _destPort;
+    return m_destPort;
 }
 
 void UdpSender::setDestPort(const quint16 port)
 {
-    _destPort = port;
+    m_destPort = port;
 }
 
 void UdpSender::sendData(const QString &msg)
@@ -64,5 +64,5 @@ void UdpSender::sendData(const QByteArray &datagram)
 {
     qDebug() << "sendData(QString): datagram = " << datagram;
 
-    _socket->writeDatagram(datagram, _destAddress, _destPort);
+    m_socket->writeDatagram(datagram, m_destAddr, m_destPort);
 }

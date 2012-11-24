@@ -39,10 +39,10 @@ public:
     void sendData(const QByteArray &datagram);
 
 private:
-    QUdpSocket *_socket;
+    QUdpSocket *m_socket;
 
-    QHostAddress _destAddress;
-    quint16 _destPort;
+    QHostAddress m_destAddr;
+    quint16 m_destPort;
 };
 
 #endif // UDPCLIENT_H

@@ -35,7 +35,7 @@ private slots:
 private:
     void makeConnections();
 
-    QUdpSocket socket;
+    QUdpSocket m_socket;
 };
 
 #endif // UDPLISTENER_H

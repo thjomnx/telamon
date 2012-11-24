@@ -22,7 +22,7 @@
 
 UdpReceiver::UdpReceiver()
 {
-    socket.bind(52436);
+    m_socket.bind(52436);
 
     makeConnections();
 }
@@ -37,10 +37,10 @@ void UdpReceiver::processPendingDatagrams()
 
     do
     {
-        datagram.resize(socket.pendingDatagramSize());
-        socket.readDatagram(datagram.data(), datagram.size());
+        datagram.resize(m_socket.pendingDatagramSize());
+        m_socket.readDatagram(datagram.data(), datagram.size());
     }
-    while (socket.hasPendingDatagrams());
+    while (m_socket.hasPendingDatagrams());
 
     QString msg;
 
@@ -54,5 +54,5 @@ void UdpReceiver::processPendingDatagrams()
 
 void UdpReceiver::makeConnections()
 {
-    connect(&socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagrams()));
+    connect(&m_socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagrams()));
 }

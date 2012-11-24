@@ -15,28 +15,4 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAINCONTROLLER_H
-#define MAINCONTROLLER_H
-
-#include <QObject>
-
-template<class T> class QLinkedList;
-class LocalEndpoint;
-
-class MainController : public QObject
-{
-    Q_OBJECT
-
-public:
-    MainController();
-    virtual ~MainController();
-
-    QLinkedList<LocalEndpoint*>* localEndpoints() const { return m_locEps; }
-
-private:
-    QLinkedList<LocalEndpoint*> *m_locEps;
-};
-
-extern MainController *controller;
-
-#endif // MAINCONTROLLER_H
+#include "localendpoint.h"

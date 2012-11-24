@@ -24,10 +24,10 @@ MainController *controller = new MainController;
 
 int main(int argc, char *argv[])
 {
-    QApplication application(argc, argv);
+    QApplication app(argc, argv);
 
-    MainWindow window;
-    window.show();
+    MainWindow win;
+    win.show();
 
-    return application.exec();
+    return app.exec();
 }
