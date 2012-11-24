@@ -21,9 +21,9 @@
 #include <QMainWindow>
 
 #include "ui_mainwindow.h"
-#include "connectioneditor.h"
-#include "remoteviewer.h"
-#include "macroeditor.h"
+#include "localendpointpanel.h"
+#include "remoteendpointpanel.h"
+#include "macropanel.h"
 
 class MainWindow : public QMainWindow, public Ui::MainWindow
 {
@@ -43,14 +43,14 @@ private:
 
     void makeConnections();
 
-    ConnectionEditor *connectionEditor;
-    RemoteViewer *remoteViewer;
-    MacroEditor *macroEditor;
+    LocalEndpointPanel *localEndpointPanel;
+    RemoteEndpointPanel *remoteEndpointPanel;
+    MacroPanel *macroPanel;
 
     QAction *action_Quit;
-    QAction *action_ConnectionEditor;
-    QAction *action_RemoteViewer;
-    QAction *action_MacroEditor;
+    QAction *action_LocalEndpointPanel;
+    QAction *action_RemoteEndpointPanel;
+    QAction *action_MacroPanel;
     QAction *action_AboutBox;
 };
 

@@ -15,31 +15,28 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MACROEDITOR_H
-#define MACROEDITOR_H
+#ifndef LOCALENDPOINTPANEL_H
+#define LOCALENDPOINTPANEL_H
 
 #include <QDockWidget>
 
-#include "ui_macroeditor.h"
-#include "textmacrowidget.h"
+#include "ui_localendpointpanel.h"
 
-class MacroEditor : public QDockWidget, public Ui::MacroEditor
+class LocalEndpointPanel : public QDockWidget, public Ui::LocalEndpointPanel
 {
     Q_OBJECT
 
 public:
-    explicit MacroEditor(QWidget *parent = 0);
-    virtual ~MacroEditor();
+    explicit LocalEndpointPanel(QWidget *parent = 0);
+    virtual ~LocalEndpointPanel();
 
 private slots:
-    void addMacroBox();
-    void removeMacroBox();
-
-    void macroTriggered(TextMacroWidget *source);
+    void addConnection();
+    void removeConnection();
 
 private:
     void initUi();
     void makeConnections();
 };
 
-#endif // MACROEDITOR_H
+#endif // LOCALENDPOINTPANEL_H

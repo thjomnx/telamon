@@ -17,11 +17,11 @@
 
 #include <QtGui>
 
-#include "connectioneditor.h"
+#include "localendpointpanel.h"
 #include "udpreceiverwidget.h"
 #include "udpreceiverconfigdialog.h"
 
-ConnectionEditor::ConnectionEditor(QWidget *parent)
+LocalEndpointPanel::LocalEndpointPanel(QWidget *parent)
     : QDockWidget(parent)
 {
     setupUi(this);
@@ -30,20 +30,20 @@ ConnectionEditor::ConnectionEditor(QWidget *parent)
     makeConnections();
 }
 
-ConnectionEditor::~ConnectionEditor()
+LocalEndpointPanel::~LocalEndpointPanel()
 {
 }
 
-void ConnectionEditor::initUi()
+void LocalEndpointPanel::initUi()
 {
 }
 
-void ConnectionEditor::makeConnections()
+void LocalEndpointPanel::makeConnections()
 {
     connect(pushButton_Add, SIGNAL(clicked(bool)), this, SLOT(addConnection()));
 }
 
-void ConnectionEditor::addConnection()
+void LocalEndpointPanel::addConnection()
 {
     UdpReceiverConfigDialog dlg(this);
 
@@ -59,6 +59,6 @@ void ConnectionEditor::addConnection()
     }
 }
 
-void ConnectionEditor::removeConnection()
+void LocalEndpointPanel::removeConnection()
 {
 }

@@ -17,9 +17,9 @@
 
 #include <QtGui>
 
-#include "macroeditor.h"
+#include "macropanel.h"
 
-MacroEditor::MacroEditor(QWidget *parent)
+MacroPanel::MacroPanel(QWidget *parent)
     : QDockWidget(parent)
 {
     setupUi(this);
@@ -28,11 +28,11 @@ MacroEditor::MacroEditor(QWidget *parent)
     makeConnections();
 }
 
-MacroEditor::~MacroEditor()
+MacroPanel::~MacroPanel()
 {
 }
 
-void MacroEditor::initUi()
+void MacroPanel::initUi()
 {
     QList<TextMacroWidget*> list = scrollAreaWidgetContents->findChildren<TextMacroWidget*>();
 
@@ -42,13 +42,13 @@ void MacroEditor::initUi()
     }
 }
 
-void MacroEditor::makeConnections()
+void MacroPanel::makeConnections()
 {
     connect(pushButton_Add, SIGNAL(clicked(bool)), this, SLOT(addMacroBox()));
     connect(pushButton_Remove, SIGNAL(clicked(bool)), this, SLOT(removeMacroBox()));
 }
 
-void MacroEditor::addMacroBox()
+void MacroPanel::addMacroBox()
 {
     QList<TextMacroWidget*> list = scrollAreaWidgetContents->findChildren<TextMacroWidget*>();
     TextMacroWidget *tmw = new TextMacroWidget(this);
@@ -66,7 +66,7 @@ void MacroEditor::addMacroBox()
     }
 }
 
-void MacroEditor::removeMacroBox()
+void MacroPanel::removeMacroBox()
 {
     QList<TextMacroWidget*> list = scrollAreaWidgetContents->findChildren<TextMacroWidget*>();
 
@@ -90,7 +90,7 @@ void MacroEditor::removeMacroBox()
     }
 }
 
-void MacroEditor::macroTriggered(TextMacroWidget *source)
+void MacroPanel::macroTriggered(TextMacroWidget *source)
 {
     qDebug() << "macroTriggered():" << source;
 }

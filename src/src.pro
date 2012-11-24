@@ -38,22 +38,22 @@ OBJECTS_DIR = ../build/telamon
 
 # Main sources
 HEADERS += mainwindow.h \
-           connectioneditor.h \
-           remoteviewer.h \
-           macroeditor.h \
+           localendpointpanel.h \
+           remoteendpointpanel.h \
+           macropanel.h \
            textmacrowidget.h
 
 SOURCES += main.cpp \
            mainwindow.cpp \
-           connectioneditor.cpp \
-           remoteviewer.cpp \
-           macroeditor.cpp \
+           localendpointpanel.cpp \
+           remoteendpointpanel.cpp \
+           macropanel.cpp \
            textmacrowidget.cpp
 
 FORMS += mainwindow.ui \
-         connectioneditor.ui \
-         remoteviewer.ui \
-         macroeditor.ui \
+         localendpointpanel.ui \
+         remoteendpointpanel.ui \
+         macropanel.ui \
          textmacrowidget.ui
 
 # Utility sources

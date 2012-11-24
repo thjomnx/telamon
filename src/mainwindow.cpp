@@ -33,17 +33,17 @@ MainWindow::MainWindow()
     makeConnections();
 
 #ifdef DEBUG
-    action_ConnectionEditor->trigger();
-    //action_RemoteViewer->trigger();
-    //action_MacroEditor->trigger();
+    action_LocalEndpointPanel->trigger();
+    //action_RemoteEndpointPanel->trigger();
+    //action_MacroPanel->trigger();
 #endif
 }
 
 MainWindow::~MainWindow()
 {
-    delete macroEditor;
-    delete remoteViewer;
-    delete connectionEditor;
+    delete macroPanel;
+    delete remoteEndpointPanel;
+    delete localEndpointPanel;
 }
 
 void MainWindow::showAboutBox()
@@ -54,14 +54,14 @@ void MainWindow::showAboutBox()
 
 void MainWindow::createChilds()
 {
-    connectionEditor = new ConnectionEditor(this);
-    connectionEditor->hide();
+    localEndpointPanel = new LocalEndpointPanel(this);
+    localEndpointPanel->hide();
 
-    remoteViewer = new RemoteViewer(this);
-    remoteViewer->hide();
+    remoteEndpointPanel = new RemoteEndpointPanel(this);
+    remoteEndpointPanel->hide();
 
-    macroEditor = new MacroEditor(this);
-    macroEditor->hide();
+    macroPanel = new MacroPanel(this);
+    macroPanel->hide();
 }
 
 void MainWindow::createActions()
@@ -70,20 +70,20 @@ void MainWindow::createActions()
     action_Quit->setShortcut(QKeySequence::Quit);
     action_Quit->setStatusTip(tr("Terminate all sessions and quit the application"));
 
-    action_ConnectionEditor = new QAction(tr("&Connection Editor"), this);
-    action_ConnectionEditor->setCheckable(true);
-    action_ConnectionEditor->setShortcut(tr("Ctrl+C"));
-    action_ConnectionEditor->setStatusTip(tr("Show or hide the connection editor"));
+    action_LocalEndpointPanel = new QAction(tr("&Local Endpoints"), this);
+    action_LocalEndpointPanel->setCheckable(true);
+    action_LocalEndpointPanel->setShortcut(tr("Ctrl+C"));
+    action_LocalEndpointPanel->setStatusTip(tr("Show or hide the panel for local endpoints"));
 
-    action_RemoteViewer = new QAction(tr("&Remote Viewer"), this);
-    action_RemoteViewer->setCheckable(true);
-    action_RemoteViewer->setShortcut(tr("Ctrl+R"));
-    action_RemoteViewer->setStatusTip(tr("Show or hide the remote viewer"));
+    action_RemoteEndpointPanel = new QAction(tr("&Remote Endpoints"), this);
+    action_RemoteEndpointPanel->setCheckable(true);
+    action_RemoteEndpointPanel->setShortcut(tr("Ctrl+R"));
+    action_RemoteEndpointPanel->setStatusTip(tr("Show or hide the panel for remote endpoints"));
 
-    action_MacroEditor = new QAction(tr("&Macro Editor"), this);
-    action_MacroEditor->setCheckable(true);
-    action_MacroEditor->setShortcut(tr("Ctrl+M"));
-    action_MacroEditor->setStatusTip(tr("Show or hide the macro editor"));
+    action_MacroPanel = new QAction(tr("&Macros"), this);
+    action_MacroPanel->setCheckable(true);
+    action_MacroPanel->setShortcut(tr("Ctrl+M"));
+    action_MacroPanel->setStatusTip(tr("Show or hide the macro panel"));
 
     action_AboutBox = new QAction(tr("&About"), this);
     action_AboutBox->setStatusTip(tr("Show some infos about this application"));
@@ -93,22 +93,22 @@ void MainWindow::createMenus()
 {
     menu_File->addAction(action_Quit);
 
-    menu_View->addAction(action_ConnectionEditor);
-    menu_View->addAction(action_RemoteViewer);
-    menu_View->addAction(action_MacroEditor);
+    menu_View->addAction(action_LocalEndpointPanel);
+    menu_View->addAction(action_RemoteEndpointPanel);
+    menu_View->addAction(action_MacroPanel);
 
     menu_Help->addAction(action_AboutBox);
 }
 
 void MainWindow::makeConnections()
 {
-    connect(connectionEditor, SIGNAL(visibilityChanged(bool)), action_ConnectionEditor, SLOT(setChecked(bool)));
-    connect(remoteViewer, SIGNAL(visibilityChanged(bool)), action_RemoteViewer, SLOT(setChecked(bool)));
-    connect(macroEditor, SIGNAL(visibilityChanged(bool)), action_MacroEditor, SLOT(setChecked(bool)));
+    connect(localEndpointPanel, SIGNAL(visibilityChanged(bool)), action_LocalEndpointPanel, SLOT(setChecked(bool)));
+    connect(remoteEndpointPanel, SIGNAL(visibilityChanged(bool)), action_RemoteEndpointPanel, SLOT(setChecked(bool)));
+    connect(macroPanel, SIGNAL(visibilityChanged(bool)), action_MacroPanel, SLOT(setChecked(bool)));
 
     connect(action_Quit, SIGNAL(triggered(bool)), this, SLOT(close()));
-    connect(action_ConnectionEditor, SIGNAL(triggered(bool)), connectionEditor, SLOT(setVisible(bool)));
-    connect(action_RemoteViewer, SIGNAL(triggered(bool)), remoteViewer, SLOT(setVisible(bool)));
-    connect(action_MacroEditor, SIGNAL(triggered(bool)), macroEditor, SLOT(setVisible(bool)));
+    connect(action_LocalEndpointPanel, SIGNAL(triggered(bool)), localEndpointPanel, SLOT(setVisible(bool)));
+    connect(action_RemoteEndpointPanel, SIGNAL(triggered(bool)), remoteEndpointPanel, SLOT(setVisible(bool)));
+    connect(action_MacroPanel, SIGNAL(triggered(bool)), macroPanel, SLOT(setVisible(bool)));
     connect(action_AboutBox, SIGNAL(triggered(bool)), this, SLOT(showAboutBox()));
 }

@@ -17,15 +17,14 @@
 
 #include <QtGui>
 
-#include "multiformatlineedit.h"
+#include "remoteendpointpanel.h"
 
-MultiFormatLineEdit::MultiFormatLineEdit(QWidget *parent)
+RemoteEndpointPanel::RemoteEndpointPanel(QWidget *parent)
+    : QDockWidget(parent)
 {
-    MultiFormatLineEdit("", parent);
+    setupUi(this);
 }
 
-MultiFormatLineEdit::MultiFormatLineEdit(const QString& contents, QWidget *parent)
-    : QLineEdit(parent)
+RemoteEndpointPanel::~RemoteEndpointPanel()
 {
-    setText(contents);
 }

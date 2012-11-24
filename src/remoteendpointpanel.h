@@ -15,18 +15,20 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MULTIFORMATLINEEDIT_H
-#define MULTIFORMATLINEEDIT_H
+#ifndef REMOTEENDPOINTPANEL_H
+#define REMOTEENDPOINTPANEL_H
 
-#include <QLineEdit>
+#include <QDockWidget>
 
-class MultiFormatLineEdit : public QLineEdit
+#include "ui_remoteendpointpanel.h"
+
+class RemoteEndpointPanel : public QDockWidget, public Ui::RemoteEndpointPanel
 {
     Q_OBJECT
 
 public:
-    explicit MultiFormatLineEdit(QWidget *parent = 0);
-    MultiFormatLineEdit(const QString& , QWidget *parent = 0);
+    explicit RemoteEndpointPanel(QWidget *parent = 0);
+    virtual ~RemoteEndpointPanel();
 };
 
-#endif // MULTIFORMATLINEEDIT_H
+#endif // REMOTEENDPOINTPANEL_H

@@ -15,28 +15,31 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CONNECTIONEDITOR_H
-#define CONNECTIONEDITOR_H
+#ifndef MACROPANEL_H
+#define MACROPANEL_H
 
 #include <QDockWidget>
 
-#include "ui_connectioneditor.h"
+#include "ui_macropanel.h"
+#include "textmacrowidget.h"
 
-class ConnectionEditor : public QDockWidget, public Ui::ConnectionEditor
+class MacroPanel : public QDockWidget, public Ui::MacroPanel
 {
     Q_OBJECT
 
 public:
-    explicit ConnectionEditor(QWidget *parent = 0);
-    virtual ~ConnectionEditor();
+    explicit MacroPanel(QWidget *parent = 0);
+    virtual ~MacroPanel();
 
 private slots:
-    void addConnection();
-    void removeConnection();
+    void addMacroBox();
+    void removeMacroBox();
+
+    void macroTriggered(TextMacroWidget *source);
 
 private:
     void initUi();
     void makeConnections();
 };
 
-#endif // CONNECTIONEDITOR_H
+#endif // MACROPANEL_H
