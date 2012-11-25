@@ -20,15 +20,23 @@
 
 #include "udpreceiver.h"
 
-UdpReceiver::UdpReceiver()
+UdpReceiver::UdpReceiver(QHostAddress &address, quint16 port)
+    : LocalEndpoint(address, port)
 {
-    m_socket.bind(52436);
+    m_socket = new QUdpSocket();
+    m_socket->bind(address, port);
 
     makeConnections();
 }
 
 UdpReceiver::~UdpReceiver()
 {
+    delete m_socket;
+}
+
+void UdpReceiver::makeConnections()
+{
+    connect(m_socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagrams()));
 }
 
 void UdpReceiver::processPendingDatagrams()
@@ -37,11 +45,14 @@ void UdpReceiver::processPendingDatagrams()
 
     do
     {
-        datagram.resize(m_socket.pendingDatagramSize());
-        m_socket.readDatagram(datagram.data(), datagram.size());
-    }
-    while (m_socket.hasPendingDatagrams());
+        datagram.resize(m_socket->pendingDatagramSize());
+        m_socket->readDatagram(datagram.data(), datagram.size());
 
+        emit dataReceived(datagram);
+    }
+    while (m_socket->hasPendingDatagrams());
+
+#ifdef DEBUG
     QString msg;
 
     QDataStream in(&datagram, QIODevice::ReadOnly);
@@ -50,9 +61,5 @@ void UdpReceiver::processPendingDatagrams()
     in >> msg;
 
     qDebug() << "processPendingDatagrams(): msg = " << msg;
-}
-
-void UdpReceiver::makeConnections()
-{
-    connect(&m_socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagrams()));
+#endif
 }

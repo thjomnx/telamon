@@ -27,7 +27,7 @@
         </font>
        </property>
        <property name="text">
-        <string>UdpReceiver::dummy</string>
+        <string>dummy</string>
        </property>
       </widget>
      </item>

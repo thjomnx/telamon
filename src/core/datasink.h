@@ -15,35 +15,14 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UDPRECEIVER_H
-#define UDPRECEIVER_H
+#ifndef DATASINK_H
+#define DATASINK_H
 
-#include <QHostAddress>
+#include <QObject>
 
-#include "localendpoint.h"
-
-class QUdpSocket;
-
-class UdpReceiver : public LocalEndpoint
+class DataSink : public QObject
 {
     Q_OBJECT
-
-public:
-    explicit UdpReceiver(QHostAddress &address, quint16 port);
-    virtual ~UdpReceiver();
-
-    QUdpSocket* socket() const { return m_socket; }
-
-signals:
-    void dataReceived(QByteArray &datagram);
-
-private:
-    void makeConnections();
-
-    QUdpSocket *m_socket;
-
-private slots:
-    void processPendingDatagrams();
 };
 
-#endif // UDPRECEIVER_H
+#endif // DATASINK_H

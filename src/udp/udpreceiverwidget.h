@@ -22,13 +22,25 @@
 
 #include "ui_udpreceiverwidget.h"
 
+class LocalEndpoint;
+
 class UdpReceiverWidget : public QWidget, public Ui::UdpReceiverWidget
 {
     Q_OBJECT
 
 public:
-    explicit UdpReceiverWidget(QWidget *parent = 0);
+    explicit UdpReceiverWidget(QWidget *parent = 0, LocalEndpoint *endpoint = 0);
     virtual ~UdpReceiverWidget();
+
+    LocalEndpoint* endpoint() const { return m_endpoint; }
+
+private slots:
+    void subjectUpdated();
+
+private:
+    void updateUi();
+
+    LocalEndpoint *m_endpoint;
 };
 
 #endif // UDPRECEIVERWIDGET_H

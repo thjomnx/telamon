@@ -35,8 +35,8 @@ private slots:
     void removeEndpoint();
 
 private:
-    void initUi();
     void makeConnections();
+    void updateUi();
 };
 
 #endif // LOCALENDPOINTPANEL_H

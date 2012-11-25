@@ -16,3 +16,14 @@
  */
 
 #include "localendpoint.h"
+
+LocalEndpoint::LocalEndpoint(QHostAddress &address, quint16 port)
+    : QObject()
+{
+    m_address = address;
+    m_port = port;
+}
+
+LocalEndpoint::~LocalEndpoint()
+{
+}

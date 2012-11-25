@@ -16,15 +16,35 @@
  */
 
 #include <QtGui>
+#include <QHostAddress>
 
 #include "udpreceiverwidget.h"
+#include <localendpoint.h>
 
-UdpReceiverWidget::UdpReceiverWidget(QWidget *parent)
+UdpReceiverWidget::UdpReceiverWidget(QWidget *parent, LocalEndpoint *endpoint)
     : QWidget(parent)
 {
     setupUi(this);
+
+    m_endpoint = endpoint;
+
+    updateUi();
 }
 
 UdpReceiverWidget::~UdpReceiverWidget()
 {
+}
+
+void UdpReceiverWidget::subjectUpdated()
+{
+    updateUi();
+}
+
+void UdpReceiverWidget::updateUi()
+{
+    QString text = m_endpoint->address().toString();
+    text.append(':');
+    text.append(QString::number(m_endpoint->port()));
+
+    label->setText(text);
 }

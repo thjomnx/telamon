@@ -26,7 +26,7 @@ application = telamon
 TARGET = $${application}
 TEMPLATE = app
 DESTDIR = ../bin
-INCLUDEPATH += . udp utils
+INCLUDEPATH += . core udp utils
 
 # Qt settings
 QT += core gui network
@@ -44,11 +44,16 @@ HEADERS += *.h
 SOURCES += *.cpp
 FORMS += *.ui
 
-# Utility sources
-HEADERS += utils/*.h
-SOURCES += utils/*.cpp
+# Core sources
+HEADERS += core/*.h
+SOURCES += core/*.cpp
 
 # UDP sources
 HEADERS += udp/*.h
 SOURCES += udp/*.cpp
 FORMS += udp/*.ui
+
+# Utility sources
+HEADERS += utils/*.h
+SOURCES += utils/*.cpp
+

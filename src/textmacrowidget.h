@@ -31,7 +31,7 @@ public:
     virtual ~TextMacroWidget();
 
 signals:
-    void macroTriggered(TextMacroWidget* source);
+    void macroTriggered(TextMacroWidget *source);
 
 private:
     void makeConnections();

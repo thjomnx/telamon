@@ -18,6 +18,8 @@
 #include <QtGui>
 
 #include "localendpointpanel.h"
+#include "maincontroller.h"
+#include "udpreceiver.h"
 #include "udpreceiverwidget.h"
 #include "udpreceiverconfigdialog.h"
 
@@ -26,16 +28,33 @@ LocalEndpointPanel::LocalEndpointPanel(QWidget *parent)
 {
     setupUi(this);
 
-    initUi();
     makeConnections();
+    updateUi();
 }
 
 LocalEndpointPanel::~LocalEndpointPanel()
 {
 }
 
-void LocalEndpointPanel::initUi()
+void LocalEndpointPanel::updateUi()
 {
+    // Clear child widgets
+    QList<UdpReceiverWidget*> children = scrollAreaWidgetContents->findChildren<UdpReceiverWidget*>();
+
+    foreach(UdpReceiverWidget *widget, children)
+    {
+        delete widget;
+    }
+
+    // Walk through endpoints and add a widget for each one
+    QBoxLayout *layout = static_cast<QBoxLayout*>(scrollAreaWidgetContents->layout());
+    QList<LocalEndpoint*> endpoints = controller->localEndpoints();
+
+    foreach(LocalEndpoint *endpoint, endpoints)
+    {
+        UdpReceiverWidget *urw = new UdpReceiverWidget(this, endpoint);
+        layout->insertWidget(0, urw);
+    }
 }
 
 void LocalEndpointPanel::makeConnections()
@@ -49,13 +68,13 @@ void LocalEndpointPanel::addEndpoint()
 
     if (dlg.exec())
     {
-        QList<UdpReceiverWidget*> list = scrollAreaWidgetContents->findChildren<UdpReceiverWidget*>();
-        UdpReceiverWidget *urw = new UdpReceiverWidget(this);
+        QHostAddress address = QHostAddress(dlg.hostAddress());
+        quint16 port = dlg.portNumber();
 
-        qDebug() << "addConnection():" << urw;
+        UdpReceiver *receiver = new UdpReceiver(address, port);
+        controller->addLocalEndpoint(receiver);
 
-        QBoxLayout* layout = static_cast<QBoxLayout*>(scrollAreaWidgetContents->layout());
-        layout->insertWidget(list.count(), urw);
+        updateUi();
     }
 }
 

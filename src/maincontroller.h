@@ -20,8 +20,9 @@
 
 #include <QObject>
 
-template<class T> class QLinkedList;
+template<class T> class QList;
 class LocalEndpoint;
+class DataSink;
 
 class MainController : public QObject
 {
@@ -31,10 +32,14 @@ public:
     MainController();
     virtual ~MainController();
 
-    QLinkedList<LocalEndpoint*>* localEndpoints() const { return m_locEps; }
+    QList<LocalEndpoint*> localEndpoints() const { return m_localEndpoints; }
+    QList<DataSink*> dataSinks() const { return m_dataSinks; }
+
+    void addLocalEndpoint(LocalEndpoint *endpoint);
 
 private:
-    QLinkedList<LocalEndpoint*> *m_locEps;
+    QList<LocalEndpoint*> m_localEndpoints;
+    QList<DataSink*> m_dataSinks;
 };
 
 extern MainController *controller;

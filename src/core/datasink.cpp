@@ -15,14 +15,4 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef LOCALENDPOINT_H
-#define LOCALENDPOINT_H
-
-#include <QObject>
-
-class LocalEndpoint : QObject
-{
-    Q_OBJECT
-};
-
-#endif // LOCALENDPOINT_H
+#include "datasink.h"
