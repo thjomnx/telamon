@@ -43,7 +43,7 @@ private:
     QUdpSocket *m_socket;
 
 private slots:
-    void processPendingDatagrams();
+    void readDatagrams();
 };
 
 #endif // UDPRECEIVER_H

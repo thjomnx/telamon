@@ -36,10 +36,10 @@ UdpReceiver::~UdpReceiver()
 
 void UdpReceiver::makeConnections()
 {
-    connect(m_socket, SIGNAL(readyRead()), this, SLOT(processPendingDatagrams()));
+    connect(m_socket, SIGNAL(readyRead()), this, SLOT(readDatagrams()));
 }
 
-void UdpReceiver::processPendingDatagrams()
+void UdpReceiver::readDatagrams()
 {
     QByteArray datagram;
 
@@ -51,15 +51,4 @@ void UdpReceiver::processPendingDatagrams()
         emit dataReceived(datagram);
     }
     while (m_socket->hasPendingDatagrams());
-
-#ifdef DEBUG
-    QString msg;
-
-    QDataStream in(&datagram, QIODevice::ReadOnly);
-    in.setVersion(QDataStream::Qt_4_8);
-
-    in >> msg;
-
-    qDebug() << "processPendingDatagrams(): msg = " << msg;
-#endif
 }

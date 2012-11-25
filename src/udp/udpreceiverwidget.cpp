@@ -42,7 +42,8 @@ void UdpReceiverWidget::subjectUpdated()
 
 void UdpReceiverWidget::updateUi()
 {
-    QString text = m_endpoint->address().toString();
+    QString text = "U  ";
+    text.append(m_endpoint->address().toString());
     text.append(':');
     text.append(QString::number(m_endpoint->port()));
 
