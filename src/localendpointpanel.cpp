@@ -48,9 +48,9 @@ void LocalEndpointPanel::updateUi()
 
     // Walk through endpoints and add a widget for each one
     QBoxLayout *layout = static_cast<QBoxLayout*>(scrollAreaWidgetContents->layout());
-    QList<LocalEndpoint*> endpoints = controller->localEndpoints();
+    QList<LocalEndpoint*> *endpoints = controller->localEndpoints();
 
-    foreach(LocalEndpoint *endpoint, endpoints)
+    foreach(LocalEndpoint *endpoint, *endpoints)
     {
         UdpReceiverWidget *urw = new UdpReceiverWidget(this, endpoint);
         layout->insertWidget(0, urw);
@@ -72,7 +72,7 @@ void LocalEndpointPanel::addEndpoint()
         quint16 port = dlg.portNumber();
 
         UdpReceiver *receiver = new UdpReceiver(address, port);
-        controller->addLocalEndpoint(receiver);
+        controller->localEndpoints()->append(receiver);
 
         updateUi();
     }

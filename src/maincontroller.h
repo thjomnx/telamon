@@ -32,10 +32,8 @@ public:
     MainController();
     virtual ~MainController();
 
-    QList<LocalEndpoint*> localEndpoints() const { return m_localEndpoints; }
-    QList<DataSink*> dataSinks() const { return m_dataSinks; }
-
-    void addLocalEndpoint(LocalEndpoint *endpoint);
+    QList<LocalEndpoint*>* localEndpoints() { return &m_localEndpoints; }
+    QList<DataSink*>* dataSinks() { return &m_dataSinks; }
 
 private:
     QList<LocalEndpoint*> m_localEndpoints;

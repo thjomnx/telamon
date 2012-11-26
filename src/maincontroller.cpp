@@ -28,8 +28,3 @@ MainController::MainController()
 MainController::~MainController()
 {
 }
-
-void MainController::addLocalEndpoint(LocalEndpoint *endpoint)
-{
-    m_localEndpoints.append(endpoint);
-}
