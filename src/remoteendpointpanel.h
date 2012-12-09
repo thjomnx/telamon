@@ -28,7 +28,6 @@ class RemoteEndpointPanel : public QDockWidget, public Ui::RemoteEndpointPanel
 
 public:
     explicit RemoteEndpointPanel(QWidget *parent = 0);
-    virtual ~RemoteEndpointPanel();
 };
 
 #endif // REMOTEENDPOINTPANEL_H

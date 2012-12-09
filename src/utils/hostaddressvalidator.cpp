@@ -25,10 +25,6 @@ HostAddressValidator::HostAddressValidator(QObject *parent)
     mode = Ipv4ValidatorMode;
 }
 
-HostAddressValidator::~HostAddressValidator()
-{
-}
-
 QValidator::State HostAddressValidator::validate(QString &input, int &pos) const
 {
     if (input.isEmpty())

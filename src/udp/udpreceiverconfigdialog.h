@@ -30,7 +30,6 @@ class UdpReceiverConfigDialog : public QDialog, public Ui::UdpReceiverConfigDial
 
 public:
     UdpReceiverConfigDialog(QWidget *parent = 0, Qt::WindowFlags f = 0);
-    virtual ~UdpReceiverConfigDialog();
 
     QString hostAddress() const;
     int portNumber() const;

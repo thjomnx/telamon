@@ -29,11 +29,6 @@ UdpReceiverConfigDialog::UdpReceiverConfigDialog(QWidget *parent, Qt::WindowFlag
     makeConnections();
 }
 
-UdpReceiverConfigDialog::~UdpReceiverConfigDialog()
-{
-    delete validator;
-}
-
 QString UdpReceiverConfigDialog::hostAddress() const
 {
     return comboBox_Address->currentText().trimmed();

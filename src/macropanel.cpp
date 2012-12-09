@@ -28,10 +28,6 @@ MacroPanel::MacroPanel(QWidget *parent)
     makeConnections();
 }
 
-MacroPanel::~MacroPanel()
-{
-}
-
 void MacroPanel::initUi()
 {
     QList<TextMacroWidget*> list = scrollAreaWidgetContents->findChildren<TextMacroWidget*>();

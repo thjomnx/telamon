@@ -24,7 +24,3 @@ DataSinkPanel::DataSinkPanel(QWidget *parent)
 {
     setupUi(this);
 }
-
-DataSinkPanel::~DataSinkPanel()
-{
-}

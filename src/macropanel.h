@@ -29,7 +29,6 @@ class MacroPanel : public QDockWidget, public Ui::MacroPanel
 
 public:
     explicit MacroPanel(QWidget *parent = 0);
-    virtual ~MacroPanel();
 
 private slots:
     void addMacroBox();

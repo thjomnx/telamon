@@ -28,7 +28,6 @@ class DataSinkPanel : public QDockWidget, public Ui::DataSinkPanel
 
 public:
     explicit DataSinkPanel(QWidget *parent = 0);
-    virtual ~DataSinkPanel();
 };
 
 #endif // DATASINKPANEL_H

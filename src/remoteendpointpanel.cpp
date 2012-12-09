@@ -24,7 +24,3 @@ RemoteEndpointPanel::RemoteEndpointPanel(QWidget *parent)
 {
     setupUi(this);
 }
-
-RemoteEndpointPanel::~RemoteEndpointPanel()
-{
-}

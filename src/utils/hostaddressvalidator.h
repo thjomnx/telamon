@@ -33,7 +33,6 @@ public:
     };
 
     explicit HostAddressValidator(QObject *parent = 0);
-    virtual ~HostAddressValidator();
 
     void fixup(QString &) const {};
     QValidator::State validate(QString &input, int &pos) const;

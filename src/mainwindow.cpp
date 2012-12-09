@@ -40,14 +40,6 @@ MainWindow::MainWindow()
 #endif
 }
 
-MainWindow::~MainWindow()
-{
-    delete macroPanel;
-    delete dataSinkPanel;
-    delete remoteEndpointPanel;
-    delete localEndpointPanel;
-}
-
 void MainWindow::showAboutBox()
 {
     QString infoText = tr("There isn't so much yet ...");

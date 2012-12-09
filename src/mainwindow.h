@@ -32,7 +32,6 @@ class MainWindow : public QMainWindow, public Ui::MainWindow
 
 public:
     MainWindow();
-    virtual ~MainWindow();
 
 private slots:
     void showAboutBox();
