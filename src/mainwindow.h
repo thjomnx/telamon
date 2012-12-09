@@ -34,6 +34,7 @@ public:
     MainWindow();
 
 private slots:
+    void createChain();
     void showAboutBox();
 
 private:
@@ -48,6 +49,7 @@ private:
     DataSinkPanel *dataSinkPanel;
     MacroPanel *macroPanel;
 
+    QAction *action_New;
     QAction *action_Quit;
     QAction *action_LocalEndpointPanel;
     QAction *action_RemoteEndpointPanel;

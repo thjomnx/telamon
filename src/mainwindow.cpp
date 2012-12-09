@@ -17,8 +17,9 @@
 
 #include <QtGui>
 
-#include "mainwindow.h"
 #include "maincontroller.h"
+#include "mainwindow.h"
+#include "udpreceiverconfigdialog.h"
 
 #define DEBUG
 
@@ -38,6 +39,16 @@ MainWindow::MainWindow()
     //action_RemoteEndpointPanel->trigger();
     //action_MacroPanel->trigger();
 #endif
+}
+
+void MainWindow::createChain()
+{
+    UdpReceiverConfigDialog dlg;
+
+    if (dlg.exec())
+    {
+        controller->createLocalEndpoint(dlg.hostAddress(), dlg.portNumber());
+    }
 }
 
 void MainWindow::showAboutBox()
@@ -63,6 +74,10 @@ void MainWindow::createChilds()
 
 void MainWindow::createActions()
 {
+    action_New = new QAction(tr("&New..."), this);
+    action_New->setShortcut(QKeySequence::New);
+    action_New->setStatusTip(tr("Create a new data flow chain"));
+
     action_Quit = new QAction(tr("&Quit"), this);
     action_Quit->setShortcut(QKeySequence::Quit);
     action_Quit->setStatusTip(tr("Terminate all sessions and quit the application"));
@@ -93,6 +108,7 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
+    menu_File->addAction(action_New);
     menu_File->addAction(action_Quit);
 
     menu_View->addAction(action_LocalEndpointPanel);
@@ -110,6 +126,7 @@ void MainWindow::makeConnections()
     connect(dataSinkPanel, SIGNAL(visibilityChanged(bool)), action_DataSinkPanel, SLOT(setChecked(bool)));
     connect(macroPanel, SIGNAL(visibilityChanged(bool)), action_MacroPanel, SLOT(setChecked(bool)));
 
+    connect(action_New, SIGNAL(triggered(bool)), this, SLOT(createChain()));
     connect(action_Quit, SIGNAL(triggered(bool)), this, SLOT(close()));
     connect(action_LocalEndpointPanel, SIGNAL(triggered(bool)), localEndpointPanel, SLOT(setVisible(bool)));
     connect(action_RemoteEndpointPanel, SIGNAL(triggered(bool)), remoteEndpointPanel, SLOT(setVisible(bool)));
