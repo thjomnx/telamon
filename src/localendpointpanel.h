@@ -22,21 +22,22 @@
 
 #include "ui_localendpointpanel.h"
 
+class LocalEndpointListModel;
+
 class LocalEndpointPanel : public QDockWidget, public Ui::LocalEndpointPanel
 {
     Q_OBJECT
 
 public:
     explicit LocalEndpointPanel(QWidget *parent = 0);
-    virtual ~LocalEndpointPanel();
 
 private slots:
-    void addEndpoint();
-    void removeEndpoint();
+    void updateUi();
 
 private:
     void makeConnections();
-    void updateUi();
+
+    LocalEndpointListModel *model;
 };
 
 #endif // LOCALENDPOINTPANEL_H

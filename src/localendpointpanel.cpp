@@ -17,67 +17,30 @@
 
 #include <QtGui>
 
-#include "localendpointpanel.h"
 #include "maincontroller.h"
-#include "udpreceiver.h"
-#include "udpreceiverwidget.h"
-#include "udpreceiverconfigdialog.h"
+#include "localendpointpanel.h"
+#include "localendpointlistmodel.h"
 
 LocalEndpointPanel::LocalEndpointPanel(QWidget *parent)
     : QDockWidget(parent)
 {
     setupUi(this);
 
+    model = new LocalEndpointListModel(this);
+
     makeConnections();
     updateUi();
 }
 
-LocalEndpointPanel::~LocalEndpointPanel()
-{
-}
-
 void LocalEndpointPanel::updateUi()
 {
-    // Clear child widgets
-    QList<UdpReceiverWidget*> children = scrollAreaWidgetContents->findChildren<UdpReceiverWidget*>();
+    QMap<int, LocalEndpoint*> endpoints = controller->localEndpoints();
+    model->setEndpoints(endpoints);
 
-    foreach(UdpReceiverWidget *widget, children)
-    {
-        delete widget;
-    }
-
-    // Walk through endpoints and add a widget for each one
-    QBoxLayout *layout = static_cast<QBoxLayout*>(scrollAreaWidgetContents->layout());
-    QList<LocalEndpoint*> *endpoints = controller->localEndpoints();
-
-    foreach(LocalEndpoint *endpoint, *endpoints)
-    {
-        UdpReceiverWidget *urw = new UdpReceiverWidget(this, endpoint);
-        layout->insertWidget(0, urw);
-    }
+    listView->setModel(model);
 }
 
 void LocalEndpointPanel::makeConnections()
 {
-    connect(pushButton_Add, SIGNAL(clicked(bool)), this, SLOT(addEndpoint()));
-}
-
-void LocalEndpointPanel::addEndpoint()
-{
-    UdpReceiverConfigDialog dlg(this);
-
-    if (dlg.exec())
-    {
-        QHostAddress address = QHostAddress(dlg.hostAddress());
-        quint16 port = dlg.portNumber();
-
-        UdpReceiver *receiver = new UdpReceiver(address, port);
-        controller->localEndpoints()->append(receiver);
-
-        updateUi();
-    }
-}
-
-void LocalEndpointPanel::removeEndpoint()
-{
+    connect(controller, SIGNAL(localEndpointsChanged()), this, SLOT(updateUi()));
 }

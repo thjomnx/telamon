@@ -18,6 +18,7 @@
 #include <QtGui>
 
 #include "mainwindow.h"
+#include "maincontroller.h"
 
 #define DEBUG
 

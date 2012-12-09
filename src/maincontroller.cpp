@@ -15,10 +15,8 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QList>
-
 #include "maincontroller.h"
-#include "localendpoint.h"
+#include "udpreceiver.h"
 
 MainController::MainController()
     : QObject()
@@ -27,4 +25,22 @@ MainController::MainController()
 
 MainController::~MainController()
 {
+}
+
+int MainController::createLocalEndpoint(const QString &host, const quint16 port)
+{
+    QHostAddress addr = QHostAddress(host);
+    UdpReceiver *recv = new UdpReceiver(addr, port);
+    int id = m_localEndpoints.count();
+
+    m_localEndpoints.insert(id, recv);
+
+    emit localEndpointsChanged();
+
+    return id;
+}
+
+void MainController::removeLocalEndpoint(const int id)
+{
+    m_localEndpoints.remove(id);
 }

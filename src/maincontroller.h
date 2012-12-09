@@ -19,10 +19,9 @@
 #define MAINCONTROLLER_H
 
 #include <QObject>
+#include <QMap>
 
-template<class T> class QList;
 class LocalEndpoint;
-class DataSink;
 
 class MainController : public QObject
 {
@@ -32,12 +31,16 @@ public:
     MainController();
     virtual ~MainController();
 
-    QList<LocalEndpoint*>* localEndpoints() { return &m_localEndpoints; }
-    QList<DataSink*>* dataSinks() { return &m_dataSinks; }
+    QMap<int, LocalEndpoint*> localEndpoints() const { return m_localEndpoints; }
+
+    int createLocalEndpoint(const QString &host, const quint16 port);
+    void removeLocalEndpoint(const int id);
+
+signals:
+    void localEndpointsChanged();
 
 private:
-    QList<LocalEndpoint*> m_localEndpoints;
-    QList<DataSink*> m_dataSinks;
+    QMap<int, LocalEndpoint*> m_localEndpoints;
 };
 
 extern MainController *controller;

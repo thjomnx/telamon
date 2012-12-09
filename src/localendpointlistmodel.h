@@ -15,32 +15,28 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef UDPRECEIVERWIDGET_H
-#define UDPRECEIVERWIDGET_H
+#ifndef LOCALENDPOINTLISTMODEL_H
+#define LOCALENDPOINTLISTMODEL_H
 
-#include <QWidget>
-
-#include "ui_udpreceiverwidget.h"
+#include <QAbstractListModel>
 
 class LocalEndpoint;
 
-class UdpReceiverWidget : public QWidget, public Ui::UdpReceiverWidget
+class LocalEndpointListModel : public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit UdpReceiverWidget(QWidget *parent = 0, LocalEndpoint *endpoint = 0);
-    virtual ~UdpReceiverWidget();
+    LocalEndpointListModel(QObject *parent = 0);
 
-    LocalEndpoint* endpoint() const { return m_endpoint; }
+    void setEndpoints(const QMap<int, LocalEndpoint*> &endpoints);
 
-private slots:
-    void subjectUpdated();
+    int rowCount(const QModelIndex &parent = QModelIndex()) const;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 
 private:
-    void updateUi();
-
-    LocalEndpoint *m_endpoint;
+    QMap<int, LocalEndpoint*> m_endpoints;
 };
 
-#endif // UDPRECEIVERWIDGET_H
+#endif // LOCALENDPOINTLISTMODEL_H

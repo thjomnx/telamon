@@ -29,5 +29,7 @@ int main(int argc, char *argv[])
     MainWindow win;
     win.show();
 
-    return app.exec();
+    int exitCode = app.exec();
+
+    return exitCode;
 }
