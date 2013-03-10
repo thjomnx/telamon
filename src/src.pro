@@ -29,7 +29,7 @@ DESTDIR = ../bin
 INCLUDEPATH += . core udp utils
 
 # Qt settings
-QT += core gui network
+QT += core network widgets
 CONFIG += qt debug warn_on
 
 # Build settings

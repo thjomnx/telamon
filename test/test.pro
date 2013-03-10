@@ -20,7 +20,7 @@
 #
 
 # Qt settings
-CONFIG  += qtestlib
+QT += testlib
 INCLUDEPATH += ../src/utils ../build/telamon-test/moc
 
 # Build settings

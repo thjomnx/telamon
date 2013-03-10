@@ -25,8 +25,9 @@ LocalEndpointListModel::LocalEndpointListModel(QObject *parent)
 
 void LocalEndpointListModel::setEndpoints(const QMap<int, LocalEndpoint*> &endpoints)
 {
+    beginResetModel();
     m_endpoints = endpoints;
-    reset();
+    endResetModel();
 }
 
 int LocalEndpointListModel::rowCount(const QModelIndex &parent) const

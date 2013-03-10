@@ -15,7 +15,7 @@
  *    along with 'telamon'. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui>
+#include <QtWidgets>
 
 #include "textmacrowidget.h"
 
