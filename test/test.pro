@@ -19,14 +19,17 @@
 # Project build file (qmake) for 'telamon' testing sources
 #
 
+# User variables
+name = telamon-test
+
 # Qt settings
 QT += testlib
-INCLUDEPATH += ../src/utils ../build/telamon-test/moc
+INCLUDEPATH += ../src/utils ../build/$${name}/moc
 
 # Build settings
-DESTDIR = ../bin/telamon-test
-MOC_DIR = ../build/telamon-test/moc
-OBJECTS_DIR = ../build/telamon-test
+DESTDIR = ../bin/$${name}
+MOC_DIR = ../build/$${name}/moc
+OBJECTS_DIR = ../build/$${name}
 
 # Procedure sources
 SOURCES = procedures/hostaddressvalidatortest.cpp

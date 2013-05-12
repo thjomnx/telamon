@@ -20,12 +20,11 @@
 #
 
 # User variables
-application = telamon
+name = telamon
 
 # Target settings
-TARGET = $${application}
+TARGET = $${name}
 TEMPLATE = app
-DESTDIR = ../bin
 INCLUDEPATH += . core udp utils
 
 # Qt settings
@@ -33,11 +32,11 @@ QT += core network widgets
 CONFIG += qt debug warn_on
 
 # Build settings
-DESTDIR = ../bin/$${application}
-UI_DIR = ../build/$${application}/ui
-MOC_DIR = ../build/$${application}/moc
-RCC_DIR = ../build/$${application}/rcc
-OBJECTS_DIR = ../build/$${application}
+DESTDIR = ../bin/$${name}
+UI_DIR = ../build/$${name}/ui
+MOC_DIR = ../build/$${name}/moc
+RCC_DIR = ../build/$${name}/rcc
+OBJECTS_DIR = ../build/$${name}
 
 # Main sources
 HEADERS += *.h
